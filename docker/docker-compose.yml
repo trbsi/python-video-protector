@@ -98,7 +98,7 @@ services:
       - ../:/app
       - protectapp_media:/app/media
     depends_on: [ redis, django ]
-    command: poetry run celery -A protectapp beat --loglevel=info
+    command: poetry run celery -A protectapp beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
     networks: [ protectapp-net ]
 
 networks:
