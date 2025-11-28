@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET, require_POST
 
-from src.media.enums import MediaEnum
 from src.media.models import Media
 from src.media.services.my_content.my_content_service import MyContentService
 from src.media.services.update_my_content.update_my_content_service import UpdateMyContentService
@@ -76,8 +75,7 @@ def my_content(request: HttpRequest) -> HttpResponse:
         request,
         'my_content.html', {
             'media_list': media,
-            'media_statuses': MediaEnum.creator_statuses(),
-            'user_suggestion_api': reverse_lazy('user.api.user_search'),
+            'user_suggestion_api': 'dummy link'  # "reverse_lazy('user.api.user_search')",
         })
 
 

@@ -29,11 +29,10 @@ textarea::placeholder {
 button,
 input[type="submit"] {
   cursor: pointer;
-  border-radius: 0.5rem;
-  background-color: #0ea5a4; /* bg-primary */
+  border-radius: 0.3rem;
+  background-color: #0ea5a4;
   color: white;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.3rem;
   border: none;
   transition: background-color 0.2s;
 }
@@ -49,4 +48,17 @@ a {
 
 a.no-underline {
     text-decoration: none;
+}
+
+.errorlist {
+   padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fee2e2;
+    border-color: #fecaca;
+    color: #b91c1c;
 }

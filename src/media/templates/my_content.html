@@ -1,53 +1,76 @@
 {% extends "core/layout.html" %}
 {% load static %}
+{% load text_filters %}
 
 {% block content %}
-<div id="my-content-view" class="p-4">
+<div id="my-content-view" class="p-4" x-data="myContentComponent('{{user_suggestion_api}}')" x-init="init()">
 
-    <div class="flex-1 overflow-y-auto space-y-4">
+    <div class="flex-1  space-y-4">
         <form method="post" action="{% url 'media.update_my_media' %}" id="my_content_form">
             {% csrf_token %}
             {% for media in media_list %}
-            <div class="media-block bg-gray-900 p-4 rounded-lg space-y-2 mb-5">
+            <div class="media-block  p-4  space-y-2 mb-5 border-b-1 border-gray-400">
+                <div>
+                    {% url 'media.view_single_media' id=media.id as media_url %}
+                    <button type="button" x-on:click="copyLink('{{ media_url|full_url_filter }}')"
+                            class="">
+                        Click to copy
+                    </button>
+                    <button type="button" x-on:click="shareLink('{{ media_url|full_url_filter }}')"
+                            class="">
+                        Click to share
+                    </button>
+                    <a href="{{ media_url|full_url_filter }}">
+                        {{ media_url|full_url_filter }}
+                    </a>
+                </div>
                 <input type="hidden" name="media_ids" value="{{media.id}}">
-                <div class="flex items-center ps-4">
+                <div class="flex items-center">
                     <input name="delete" value="{{media.id}}" id="delete{{media.id}}" type="checkbox"
-                           class="w-4 h-4 bg-gray-500 border-gray-700 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                           class="flex-0 w-4 h-4 bg-gray-500 border-gray-700 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="delete{{media.id}}"
-                           class="w-full py-2 ms-2 text-sm font-medium">Mark for
+                           class="flex-1 py-2 ms-2 text-sm font-medium">Mark for
                         deletion</label>
                 </div>
                 <!-- Preview -->
-                <div class="w-full rounded overflow-hidden bg-gray-900 flex items-center justify-center">
-                    {% if media.is_image %}
-                    <img src="{{ media.get_file_url }}" class="object-contain w-full h-full" alt="Image Preview">
-                    {% elif media.is_video %}
+                <div class="w-full rounded overflow-hidden  flex items-end justify-center">
+                    {% if media.is_video %}
                     <video src="{{ media.get_file_url }}" preload="none" poster="{{media.get_thumbnail_url}}"
                            class="object-contain w-full h-full"
                            controls></video>
                     {% endif %}
                 </div>
 
-                <div x-data="myContentComponent('{{user_suggestion_api}}')" x-init="init()">
-                    <div data-suggestion-root>
-                        <!-- Textarea for file description -->
-                        <textarea
-                                id="description_field_{{media.id}}"
-                                name="descriptions"
-                                rows="5"
-                                data-file-id="{{media.id}}"
-                                placeholder="Add a description and hashtags. Tag another creator here."
-                                @input="userSuggestionComponent.fetchSuggestions($event)"
-                                class="w-full p-2 rounded bg-gray-700 text-white text-sm"
-                        >{{ media.get_description }}</textarea>
-                        {% include "components/user_suggestion_list.html" %}
-                    </div>
+                <div data-suggestion-root>
+                    <!-- Textarea for file description -->
+                    <textarea
+                            id="description_field_{{media.id}}"
+                            name="descriptions"
+                            rows="5"
+                            data-file-id="{{media.id}}"
+                            placeholder="Add a description and hashtags. Tag another creator here."
+                            @input="userSuggestionComponent.fetchSuggestions($event)"
+                            class="w-full p-2 rounded   text-sm"
+                    >{{ media.get_description }}</textarea>
+                    {% include "components/user_suggestion_list.html" %}
+                </div>
+                <div>
+                    <label class="text-sm">Unlock price in $:</label>
+                    <input type="text"
+                           inputmode="decimal"
+                           pattern="\d+(\.\d{1,2})?"
+                           name="unlockPrices"
+                           step="0.01"
+                           value="{{media.unlock_price}}"
+                           class="w-full p-2 rounded bg-gray-700 text-white text-sm"
+                    />
+
                 </div>
             </div>
             {% endfor %}
 
             {% if not media_list.object_list %}
-            <div class="flex flex-col items-center justify-center min-h-screen bg-black text-white px-4">
+            <div class="flex flex-col items-center justify-center  px-4">
                 <!-- Icon -->
                 <i class="ri-video-off-line ri-5x"></i>
                 <!-- Heading -->
@@ -79,9 +102,9 @@
         $('.media-block input[type="checkbox"]').change(function() {
             var parentDiv = $(this).closest('.media-block');
             if ($(this).is(':checked')) {
-                parentDiv.removeClass('bg-gray-900').addClass('bg-red-900');
+                parentDiv.addClass('bg-red-900');
             } else {
-                parentDiv.removeClass('bg-red-900').addClass('bg-gray-900');
+                parentDiv.removeClass('bg-red-900');
             }
         });
     });

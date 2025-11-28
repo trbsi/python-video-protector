@@ -32,6 +32,7 @@ class Media(models.Model):
     view_count = models.PositiveIntegerField(default=0)
     is_processed = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
+    unlock_price = models.DecimalField(decimal_places=2, max_digits=10, default=10)
     created_at = models.DateTimeField(auto_now_add=True)
     hashtags = models.ManyToManyField(Hashtag, through='MediaHashtag', related_name='media_hashtags')
 

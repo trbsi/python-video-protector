@@ -1,4 +1,4 @@
-<div class="border-t border-gray-700 bg-black px-4 py-3 sm:px-6">
+<div class="border-t border-gray-700 px-4 py-3 sm:px-6">
     <!-- Showing results -->
     <div class="text-center mb-4">
         <p class="text-sm text-gray-400">
@@ -17,11 +17,11 @@
         <!-- Previous arrow -->
         {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}"
-           class="inline-flex items-center rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white">
+           class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
             &laquo;
         </a>
         {% else %}
-        <span class="inline-flex items-center rounded-md border border-gray-800 bg-gray-800 px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&laquo;</span>
+        <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&laquo;</span>
         {% endif %}
 
         <!-- Page input -->
@@ -32,7 +32,7 @@
                     value="{{ page_obj.number }}"
                     min="1"
                     max="{{ page_obj.paginator.num_pages }}"
-                    class="w-16 rounded-md border border-gray-700 bg-gray-900 px-2 py-1 text-center text-sm text-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                    class="w-16 rounded-md border border-gray-500  px-2 py-1 text-center text-sm text-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                     placeholder="Page"
             >
             <span class="text-gray-400 text-sm">of {{ page_obj.paginator.num_pages }}</span>
@@ -41,11 +41,11 @@
         <!-- Next arrow -->
         {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}"
-           class="inline-flex items-center rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white">
+           class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
             &raquo;
         </a>
         {% else %}
-        <span class="inline-flex items-center rounded-md border border-gray-800 bg-gray-800 px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&raquo;</span>
+        <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&raquo;</span>
         {% endif %}
     </div>
 </div>

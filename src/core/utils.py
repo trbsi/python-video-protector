@@ -52,7 +52,7 @@ def full_url_for_path(path: str, query_params=None):
     if query_params:
         path = path + f'?{urlencode(query_params)}'
 
-    return f'{settings.APP_URL}{path}'
+    return f'https://{settings.APP_URL}{path}'
 
 
 def reverse_lazy_with_query(route_name, kwargs=None, query_params: dict | None = None):

@@ -18,6 +18,8 @@
     <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
     <script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+
 </head>
 <body class="antialiased text-gray-800 bg-gray-50">
 
@@ -32,6 +34,7 @@
             <!-- Desktop links -->
             <nav class="hidden md:flex items-center gap-8">
                 {% if user.is_authenticated %}
+                <a href="{% url 'media.my_content' %}" class="hover:text-blue-600">My content</a>
                 <a href="{% url 'media.upload' %}" class="hover:text-blue-600">Upload</a>
                 <a href="{% url 'account_logout' %}" class="hover:text-blue-600">Logout</a>
                 {% else %}
@@ -63,6 +66,7 @@
     <div id="mobile-menu" class="md:hidden hidden" aria-hidden="true">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
             {% if user.is_authenticated %}
+            <a href="{% url 'media.my_content' %}" class="block px-3 py-2 rounded-md">My content</a>
             <a href="{% url 'media.upload' %}" class="block px-3 py-2 rounded-md">Upload</a>
             <a href="{% url 'account_logout' %}" class="block px-3 py-2 rounded-md">Logout</a>
             {% else %}
@@ -82,7 +86,7 @@
         </div>
     </section>
     <!-- FOOTER -->
-    <footer class="mt-16 bg-white border-t">
+    <footer class="mt-8 bg-white border-t">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="text-sm text-gray-600">© <span id="year"></span> BrandName. All rights reserved.</div>
