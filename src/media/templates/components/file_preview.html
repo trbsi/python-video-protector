@@ -26,6 +26,17 @@
                 {% include "components/user_suggestion_list.html" %}
             </div>
 
+            <div>
+                <label class="text-sm">Unlock price in $:</label>
+                <input type="text"
+                       inputmode="decimal"
+                       pattern="\d+(\.\d{1,2})?"
+                       step="0.01"
+                       x-model="file.unlockPriceInFiat"
+                       class="w-full p-2 rounded bg-gray-700 text-white text-sm"
+                />
+            </div>
+
             <!-- Progress bar -->
             <div class="w-full bg-gray-600 rounded-full h-2 mt-2">
                 <div class="bg-blue-500 h-2 rounded-full" :style="`width: ${file.progress}%`"></div>

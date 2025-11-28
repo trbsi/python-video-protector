@@ -1,14 +1,11 @@
 from django.core.files.uploadedfile import UploadedFile
-from django.db import transaction
 
 from src.media.enums import MediaEnum
 from src.media.models import Media
 from src.media.services.hashtag.hashtag_service import HashtagService
 from src.media.utils import replace_tags
-from src.storage.crons.compress_media_task.process_media_task import ProcessMediaTask
 from src.storage.services.local_storage_service import LocalStorageService
 from src.storage.services.remote_storage_service import RemoteStorageService
-from src.storage.tasks import task_process_media
 from src.storage.utils import remote_file_path_for_media
 from src.user.models import UserProfile, User
 
@@ -78,15 +75,15 @@ class UploadMediaService:
         profile.save()
 
         # compress media
-        transaction.on_commit(
-            lambda:
-            task_process_media.delay(
-                media_id=media.id,
-                media_type=ProcessMediaTask.MEDIA_TYPE_MEDIA,
-                local_file_path=local_file_path,
-                create_thumbnail=True,
-                create_trailer=True,
-                should_compress_media=False,
-                download_from_remote=False,
-            )
-        )
+        # transaction.on_commit(
+        #     lambda:
+        #     task_process_media.delay(
+        #         media_id=media.id,
+        #         media_type=ProcessMediaTask.MEDIA_TYPE_MEDIA,
+        #         local_file_path=local_file_path,
+        #         create_thumbnail=True,
+        #         create_trailer=True,
+        #         should_compress_media=False,
+        #         download_from_remote=False,
+        #     )
+        # )

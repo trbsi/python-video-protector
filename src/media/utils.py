@@ -3,7 +3,9 @@ import re as regex
 from src.user.models import User
 
 
-def replace_tags(description: str) -> str:
+def replace_tags(description: str | None) -> str | None:
+    if not description:
+        return description
     user_tags = regex.findall(r"@\w+", description)
     for user_tag in user_tags:
         username = user_tag.replace('@', '')
@@ -16,7 +18,9 @@ def replace_tags(description: str) -> str:
     return description
 
 
-def load_tags(description: str) -> str:
+def load_tags(description: str | None) -> str | None:
+    if not description:
+        return description
     # Replace numerical @ with string @
     # e.g. @11 is @some_username
     user_tags = regex.findall(r'@\w+', description)

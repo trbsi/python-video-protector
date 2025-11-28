@@ -1,4 +1,4 @@
-function fileUploaderComponent(uploadApi, userSuggestionApi, myContentUrl, videoPriceInFiat, imagePriceInFiat) {
+function fileUploaderComponent(uploadApi, userSuggestionApi, myContentUrl) {
     return {
         files: [],           // all files in the UI (including uploaded)
         uploadedFiles: [],   // track files already uploaded
@@ -22,7 +22,7 @@ function fileUploaderComponent(uploadApi, userSuggestionApi, myContentUrl, video
                 // skip files that are already uploaded
                 if (this.uploadedFiles.some(f => f.name === file.name && f.size === file.size)) return;
                 const fileType = file.type.startsWith("image/") ? "image" : "video";
-                const unlockPriceInFiat = fileType === 'video' ? videoPriceInFiat : imagePriceInFiat;
+                const unlockPriceInFiat = 0;
 
                 const fileData = {
                     file: file,
@@ -58,6 +58,7 @@ function fileUploaderComponent(uploadApi, userSuggestionApi, myContentUrl, video
             }
 
             const xhr = new XMLHttpRequest();
+            console.log(getCsrfToken())
             xhr.open("POST", uploadApi);
             xhr.setRequestHeader("X-CSRFToken", getCsrfToken());
 

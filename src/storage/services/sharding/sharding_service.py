@@ -25,63 +25,61 @@ class ShardingService:
         # Scramble and encrypt shard
         shard_metadata = []
         for index, shard in enumerate(shards):
-            scrambled_shard, mask, mask_bit = self.scramble_shard(shard, index)
+            scrambled_shard, mask = self._scramble_shard(shard)
 
             nonce = secrets.token_bytes(12)
 
             encrypted_shard = aesgcm.encrypt(nonce=nonce, data=scrambled_shard, associated_data=None)
-            shared_name = self.shard_name(index, mask_bit)
+            shard_name = self._shard_name(index, mask)
 
-            self.upload_shard(encrypted_shard, shared_name)
+            self._upload_shard(encrypted_shard, shard_name)
 
             shard_metadata.append({
                 'nonce': nonce.hex(),
-                'shard': shared_name,
+                'shard': shard_name,
                 'mask': mask.hex(),
             })
 
-    def scramble_shard(self, shard, index: int) -> tuple[bytes, bytes, int]:
-        print(type(shard))
-        mask = os.urandom(1)  # 1 byte mask
+        return shard_metadata
+
+    def _scramble_shard(self, shard: bytes) -> tuple[bytes, bytes]:
+        # random 1 byte
+        mask = os.urandom(1)
         scrambled = bytearray()
 
-        mask_bit = index
-        while mask_bit > 7:
-            digits = list(map(int, str(mask_bit)))
-            sum_digit = 0
-            for digit in digits:
-                sum_digit += digit
-
-            if mask_bit == sum_digit:
-                sum_digit = sum_digit - 1
-
-            mask_bit = sum_digit
-
-        for byte in shard:
-            result = byte ^ mask[mask_bit]  # XOR
-            result = ((result << 3) | (result >> 5)) & 0xFF  # Rotate left 3 bits
+        for shard_byte in shard:
+            # XOR integers
+            result = shard_byte ^ mask[0]
+            # Rotate left 3 bits
+            result = ((result << 3) | (result >> 5)) & 0xFF
             scrambled.append(result)
 
-        return bytes(scrambled), mask, mask_bit
+        return bytes(scrambled), mask
 
-    def upload_shard(self, encrypted_shard, shard_name: str):
-        print(type(encrypted_shard))
+    def _upload_shard(self, encrypted_shard: bytes, shard_name: str):
+        pass
 
-    def shard_name(self, shard_index: int, mask_bit_index: int) -> str:
+    def _shard_name(self, shard_index: int, mask: bytes) -> str:
+        # e.g. bd7a2bc7-4537-4a28-8bb3-1ea7d1b4e292
         name = str(uuid.uuid4())
+        print(name)
         name = name.split('-')
 
+        # append shard_index at the end of 4537
         shard_index_place = 1
         shard_name = name[shard_index_place]
         shard_name = f'{shard_name}{shard_index}'
 
+        # Update uuid
         name[shard_index_place] = shard_name
 
+        # append mask[0](integer) at the end of 4a28
         mask_bit_index_place = 2
         mask_bit_name = name[mask_bit_index_place]
-        mask_bit_name = f'{mask_bit_name}{mask_bit_index}'
+        mask_bit_name = f'{mask_bit_name}{mask[0]}'
         name[mask_bit_index_place] = mask_bit_name
 
-        name = '-'.join(name)
+        name = '_'.join(name)
         name = f'{name}.dar.io'
+
         return name

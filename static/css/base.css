@@ -43,7 +43,7 @@ input[type="submit"]:hover {
 }
 
 a {
-    text-decoration: underline;
+    color: #1d4ed8;
 }
 
 a.no-underline {

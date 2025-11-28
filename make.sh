@@ -29,6 +29,10 @@ seed() {
     docker exec -it "$DJANGO_CONTAINER" poetry run python manage.py seed_database_command local --truncate
 }
 
+test() {
+    docker exec -it "$DJANGO_CONTAINER" poetry run python manage.py test
+}
+
 # Parse command-line argument
 if [[ $# -lt 1 ]]; then
     echo "Usage: $0 {builddocker|migrate|makemigrations}"
@@ -47,6 +51,9 @@ case "$1" in
         ;;
     seed)
         seed
+        ;;
+    test)
+        test
         ;;
     *)
         echo "Unknown command: $1"

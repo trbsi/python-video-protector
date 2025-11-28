@@ -9,7 +9,7 @@
 {% block content %}
 <!-- Upload View -->
 <div id="upload-view" class=" p-4"
-     x-data="fileUploaderComponent('{{upload_api}}', '{{user_suggestion_api}}')" x-init="init()">
+     x-data="fileUploaderComponent('{{upload_api}}', '{{user_suggestion_api}}', '{{my_content_url}}')" x-init="init()">
     <div x-show="files.length == 0"
          class="flex flex-col h-full items-center justify-center">
         <!-- Icon -->

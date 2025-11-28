@@ -4,7 +4,10 @@ from src.media.models import Media, Hashtag
 
 
 class HashtagService:
-    def save_hashtags(self, media: Media, description: str) -> None:
+    def save_hashtags(self, media: Media, description: str | None) -> None:
+        if not description:
+            return
+
         # r"#\w+" → '#' followed by one or more word characters (letters, digits, underscore)
         hashtags = regex.findall(r"#\w+", description)
         if not hashtags:
