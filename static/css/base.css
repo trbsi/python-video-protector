@@ -62,3 +62,8 @@ a.no-underline {
     border-color: #fecaca;
     color: #b91c1c;
 }
+
+/* LOGIN */
+#id_remember {
+    width: auto;
+}

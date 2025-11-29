@@ -28,7 +28,8 @@ class MediaSeeder:
 
                 Media.objects.create(
                     user=creator,
-                    file_info=rand_media,
+                    file_metadata=rand_media,
+                    shards_metadata=rand_media,
                     file_type=file_type,
                     file_trailer=rand_media if file_type == 'video' else None,
                     file_thumbnail=random_thumbnail if file_type == 'video' else None,

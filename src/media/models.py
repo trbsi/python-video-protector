@@ -20,7 +20,8 @@ class Media(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='media_user')
-    file_info = models.JSONField()
+    file_metadata = models.JSONField()
+    shards_metadata = models.JSONField()
     file_thumbnail = models.JSONField(null=True, blank=True)
     file_trailer = models.JSONField(null=True, blank=True)
     file_type = models.CharField(max_length=20, choices=MediaEnum.file_types())
@@ -46,7 +47,7 @@ class Media(models.Model):
         ]
 
     def get_file_url(self) -> str:
-        return f'{settings.STORAGE_CDN_URL}/{self.file_info.get('file_path')}'
+        return f'{settings.STORAGE_CDN_URL}/{self.file_metadata.get('file_path')}'
 
     def get_trailer_url(self) -> str | None:
         if self.is_image():

@@ -49,18 +49,18 @@
 <script>
 
     $(window).on('scroll', function () {
-    let footerTop = $('footer').offset().top - 200;
-    let btnHeight = $('#button-bar-fixed').outerHeight();
-    let windowBottom = $(window).scrollTop() + $(window).height();
+        let footerTop = $('footer').offset().top - 200;
+        let btnHeight = $('#button-bar-fixed').outerHeight();
+        let windowBottom = $(window).scrollTop() + $(window).height();
 
-    if (windowBottom >= footerTop) {
-        // Switch to absolute so it stops before footer
-        $('#button-bar-fixed') .addClass('hidden');
-    } else {
-        // Keep it fixed at bottom
-        $('#button-bar-fixed').removeClass('hidden');
-    }
-});
+        if (windowBottom >= footerTop) {
+            // Switch to absolute so it stops before footer
+            $('#button-bar-fixed') .addClass('hidden');
+        } else {
+            // Keep it fixed at bottom
+            $('#button-bar-fixed').removeClass('hidden');
+        }
+    });
 
 </script>
 {% endblock javascript %}

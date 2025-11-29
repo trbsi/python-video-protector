@@ -14,8 +14,8 @@ class DeleteUserMediaTask:
             media_item: Media = item
             try:
                 remote_storage_service.delete_file(
-                    file_id=media_item.file_info.get('file_id'),
-                    file_path=media_item.file_info.get('file_path')
+                    file_id=media_item.file_metadata.get('file_id'),
+                    file_path=media_item.file_metadata.get('file_path')
                 )
             except Exception as e:
                 bugsnag.notify(e)

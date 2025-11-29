@@ -1,8 +1,9 @@
 import bugsnag
 from celery import shared_task
 
-from src.media.crons.delete_media.delete_media_cron import DeleteMediaCron
-from src.media.crons.recreate_media_asset.recreate_thumbnail_and_trailer_cron import RecreateThumbnailAndTrailerCron
+from src.media.background_tasks.delete_media.delete_media_cron import DeleteMediaCron
+from src.media.background_tasks.recreate_media_asset.recreate_thumbnail_and_trailer_cron import \
+    RecreateThumbnailAndTrailerCron
 
 
 @shared_task

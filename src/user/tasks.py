@@ -1,7 +1,7 @@
 import bugsnag
 from celery import shared_task
 
-from src.user.crons.delete_user_media.delete_user_media_task import DeleteUserMediaTask
+from src.user.background_tasks.delete_user_media.delete_user_media_task import DeleteUserMediaTask
 
 
 @shared_task

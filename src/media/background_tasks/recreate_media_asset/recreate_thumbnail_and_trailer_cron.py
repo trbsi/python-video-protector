@@ -2,7 +2,7 @@ from django.db.models import Q
 
 from src.media.enums import MediaEnum
 from src.media.models import Media
-from src.storage.crons.compress_media_task.process_media_task import ProcessMediaTask
+from src.storage.background_tasks.process_media_task.process_media_task import ProcessMediaTask
 from src.storage.tasks import task_process_media
 
 

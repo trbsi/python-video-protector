@@ -23,7 +23,7 @@ class CompressMediaService:
             local_file_path_directory: str
     ) -> dict:
 
-        original_file_info = media.file_info
+        original_file_info = media.file_metadata
         extension = Path(original_file_info.get('file_path')).suffix  # example: .jpg or .mp4
         new_file_name = remote_file_path_for_media(media, extension, media.file_type)
 
@@ -51,7 +51,7 @@ class CompressMediaService:
         )
 
         # update model
-        media.file_info = file_info
+        media.file_metadata = file_info
         media.save()
 
         # remove remote file

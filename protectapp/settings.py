@@ -151,7 +151,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-ROOT_ENCRYPT_KEY = env('ROOT_ENCRYPT_KEY')
 APP_URL = env('APP_URL')
 APP_ENV = env('APP_ENV')
 APP_NAME = env('APP_NAME')
@@ -165,6 +164,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT_ENCRYPT_KEY = env('MEDIA_ROOT_ENCRYPT_KEY')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

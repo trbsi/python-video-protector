@@ -5,7 +5,7 @@ from src.media.enums import MediaEnum
 from src.media.models import Media
 from src.media.services.hashtag.hashtag_service import HashtagService
 from src.media.utils import replace_tags
-from src.storage.crons.compress_media_task.process_media_task import ProcessMediaTask
+from src.storage.background_tasks.process_media_task.process_media_task import ProcessMediaTask
 from src.storage.services.local_storage_service import LocalStorageService
 from src.storage.services.remote_storage_service import RemoteStorageService
 from src.storage.tasks import task_process_media
@@ -45,7 +45,8 @@ class UploadMediaService:
 
         description = replace_tags(description)
         media = Media.objects.create(
-            file_info={},  # temporary
+            file_metadata={},  # temporary
+            shards_metadata={},  # temporary
             file_type='video',  # temporary
             status=status.value,
             description=description,
@@ -64,7 +65,7 @@ class UploadMediaService:
             remote_file_path=remote_file_path
         )
 
-        media.file_info = remote_file_info
+        media.file_metadata = remote_file_info
         media.file_type = file_type
         media.save()
 
@@ -86,7 +87,6 @@ class UploadMediaService:
                 local_file_path=local_file_path,
                 create_thumbnail=True,
                 create_trailer=True,
-                should_compress_media=False,
-                download_from_remote=False,
+                create_shards=True,
             )
         )
