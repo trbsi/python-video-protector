@@ -4,12 +4,18 @@ ENV POETRY_HOME="/opt/poetry"
 ENV PATH="$POETRY_HOME/bin:$PATH"
 ENV POETRY_VIRTUALENVS_CREATE=false
 
-RUN apt-get update && apt-get install -y curl build-essential && \
+# Install ffmpeg, ffprobe and build tools
+RUN apt-get update && \
+    apt-get install -y \
+        ffmpeg \
+        curl \
+        build-essential \
+        pkg-config \
+        default-libmysqlclient-dev && \
     curl -sSL https://install.python-poetry.org | python3 - && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && \
-    apt-get install -y default-libmysqlclient-dev build-essential pkg-config
+
 
 WORKDIR /app
 

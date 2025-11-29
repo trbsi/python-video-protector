@@ -28,7 +28,7 @@ class UploadMediaService:
             self,
             user: User,
             uploaded_file: UploadedFile,
-            description: str,
+            description: str | None,
             post_type: str
     ) -> None:
         """
@@ -45,7 +45,7 @@ class UploadMediaService:
 
         description = replace_tags(description)
         media = Media.objects.create(
-            file_info='',  # temporary
+            file_info={},  # temporary
             file_type='video',  # temporary
             status=status.value,
             description=description,

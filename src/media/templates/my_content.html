@@ -3,9 +3,11 @@
 {% load text_filters %}
 
 {% block content %}
-<div id="my-content-view" class="p-4" x-data="myContentComponent('{{user_suggestion_api}}')" x-init="init()">
+<div id="my-content-view" class="p-4"
+     x-data="myContentComponent('{{user_suggestion_api}}')"
+     x-init="init()">
 
-    <div class="flex-1  space-y-4">
+    <div class="flex-1 space-y-4 relative ">
         <form method="post" action="{% url 'media.update_my_media' %}" id="my_content_form">
             {% csrf_token %}
             {% for media in media_list %}
