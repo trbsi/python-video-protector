@@ -12,8 +12,15 @@ from src.storage.utils import remote_shard_file_path_for_media
 
 
 class ShardingService:
-    def __init__(self, remote_storage_service: None | RemoteStorageService = None):
+    def __init__(
+            self,
+            remote_storage_service: None | RemoteStorageService = None,
+            aesgcm: None | AESGCM = None,
+    ):
         self.remote_storage_service = remote_storage_service or RemoteStorageService()
+        # Root key (must be 32 bytes for AES-256)
+        root_key = bytes.fromhex(settings.MEDIA_ROOT_ENCRYPT_KEY)
+        self.aesgcm = aesgcm or AESGCM(root_key)
 
     def shard_media(self, media: Media, local_file_path: str) -> None:
         # Read file
@@ -27,16 +34,12 @@ class ShardingService:
             shards.append(chunk)
 
         # Generate one master key for entire video
-        # Root key (must be 32 bytes for AES-256)
-        root_key = bytes.fromhex(settings.MEDIA_ROOT_ENCRYPT_KEY)
-        aesgcm = AESGCM(root_key)
         # Generate unique nonce for wrapping this master key
         wrap_nonce = secrets.token_bytes(12)
         # Generate per-video master key
-        master_key = AESGCM.generate_key(32)
+        master_key = AESGCM.generate_key(bit_length=256)
         # Encrypt (wrap) the master key with root key
-        wrapped_master_key = aesgcm.encrypt(nonce=wrap_nonce, data=master_key, associated_data=None)
-
+        wrapped_master_key = self.aesgcm.encrypt(nonce=wrap_nonce, data=master_key, associated_data=None)
         aesgcm_master = AESGCM(master_key)
 
         # Scramble and encrypt shard
@@ -58,8 +61,10 @@ class ShardingService:
                 'storage_metadata': remote_file_info
             })
 
-        # Now store both wrapped_master_key and wrap_nonce in your database @TODO
+        # Now store both wrapped_master_key and wrap_nonce in your database
         media.shards_metadata = shard_metadata
+        media.master_key = wrapped_master_key
+        media.nonce = wrap_nonce
         media.save()
 
     def _scramble_shard(self, shard: bytes) -> tuple[bytes, bytes]:

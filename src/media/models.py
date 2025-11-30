@@ -34,6 +34,8 @@ class Media(models.Model):
     is_processed = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
     unlock_price = models.DecimalField(decimal_places=2, max_digits=10, default=10)
+    master_key = models.BinaryField(null=True, blank=True)
+    nonce = models.BinaryField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     hashtags = models.ManyToManyField(Hashtag, through='MediaHashtag', related_name='media_hashtags')
 

@@ -11,8 +11,12 @@ class TestSharding(TestCase):
     @patch('src.storage.services.sharding.sharding_service.secrets.token_bytes')
     @patch('src.storage.services.remote_storage_service.RemoteStorageService')
     @patch('src.media.models.Media')
+    @patch('cryptography.hazmat.primitives.ciphers.aead.AESGCM')
+    @patch('cryptography.hazmat.primitives.ciphers.aead.AESGCM.generate_key')
     def test_shard_media(
             self,
+            mock_aesgcm_generate_key,
+            mock_aesgcm,
             mock_media,
             mock_remote_storage_service,
             mock_token_bytes,
@@ -22,18 +26,30 @@ class TestSharding(TestCase):
     ):
         mock_read_bytes.return_value = b'x' * (1024 * 1024)  # 4x256kb
         mock_urandom.side_effect = [bytes([1]), bytes([2]), bytes([3]), bytes([4])]
-        mock_token_bytes.side_effect = [b'a' * 12, b'b' * 12, b'c' * 12, b'd' * 12]
+        mock_token_bytes.side_effect = [b'wrapwrapnonce', b'a' * 12, b'b' * 12, b'c' * 12, b'd' * 12]
         uuid_mock.side_effect = ['bd7a2bc7-4537-4a28-8bb3-1ea7d1b4e292', '764148ff-4c0f-49d5-b57c-93d56a074feb',
                                  'fbc4832b-0d73-4979-91db-6d49f3a87d16', '2e0e7dbc-26a0-4200-ba71-75769685a27b']
         mock_remote_storage_service.upload_bytes.side_effect = [{'file_info': 'file1'}, {'file_info': 'file2'},
                                                                 {'file_info': 'file3'}, {'file_info': 'file4'}]
 
+        mock_aesgcm_generate_key.return_value = b'masterkeymasterkeymasterkey12345'
+        mock_aesgcm.encrypt.return_value = b'wrappedmasterkey'
+
         mock_media.id = 111
         mock_media.user_id = 444
         local_file_path = 'test.mp4'
-        service = ShardingService(remote_storage_service=mock_remote_storage_service)
+
+        service = ShardingService(remote_storage_service=mock_remote_storage_service, aesgcm=mock_aesgcm)
         service.shard_media(mock_media, local_file_path)
 
+        mock_aesgcm.encrypt.assert_called_once_with(
+            nonce=b'wrapwrapnonce',
+            data=b'masterkeymasterkeymasterkey12345',
+            associated_data=None
+        )
+        self.assertEqual(mock_media.nonce, b'wrapwrapnonce')
+        self.assertEqual(mock_media.master_key, b'wrappedmasterkey')
+        self.assertEqual(mock_remote_storage_service.upload_bytes.call_count, 4)
         self.assertEqual(
             mock_media.shards_metadata,
             [
@@ -63,4 +79,3 @@ class TestSharding(TestCase):
                 }
             ]
         )
-        self.assertEqual(mock_remote_storage_service.upload_bytes.call_count, 4)
