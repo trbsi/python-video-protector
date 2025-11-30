@@ -7,6 +7,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 from protectapp import settings
 from src.media.models import Media
+from src.storage.services.local_storage_service import LocalStorageService
 from src.storage.services.remote_storage_service import RemoteStorageService
 from src.storage.utils import remote_shard_file_path_for_media
 
@@ -15,9 +16,12 @@ class ShardingService:
     def __init__(
             self,
             remote_storage_service: None | RemoteStorageService = None,
+            local_storage_service: None | LocalStorageService = None,
             aesgcm: None | AESGCM = None,
     ):
         self.remote_storage_service = remote_storage_service or RemoteStorageService()
+        self.local_storage_service = local_storage_service or LocalStorageService()
+
         # Root key (must be 32 bytes for AES-256)
         root_key = bytes.fromhex(settings.MEDIA_ROOT_ENCRYPT_KEY)
         self.aesgcm = aesgcm or AESGCM(root_key)
@@ -88,6 +92,9 @@ class ShardingService:
             file_bytes=encrypted_shard,
             remote_file_path=remote_file_path
         )
+        if settings.APP_ENV == 'local':
+            self.local_storage_service.upload_byte_file(encrypted_shard, shard_name)
+
         return result
 
     def _shard_name(self, shard_index: int, mask: bytes) -> str:

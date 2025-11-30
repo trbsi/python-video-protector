@@ -133,7 +133,7 @@ class ProcessMediaTask:
             self._save_media(media)
 
     def _print(self, msg: str):
-        print('-' * 20, f' {msg} ', '-' * 20)
+        print('-' * 100, f' {msg} ', '-' * 100)
 
     def _save_media(self, media: Media) -> None:
         media.is_processed = True

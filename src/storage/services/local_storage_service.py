@@ -5,9 +5,9 @@ from pathlib import Path
 
 from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import UploadedFile, TemporaryUploadedFile
-from src.media.enums import MediaEnum
 
 from protectapp import settings
+from src.media.enums import MediaEnum
 
 
 class LocalStorageService:
@@ -46,6 +46,11 @@ class LocalStorageService:
             'local_file_path': f'{new_file_path}/{name}',
             'extension': extension
         }
+
+    def upload_byte_file(self, encrypted_shard: bytes, shard_name: str) -> None:
+        path = os.path.join(settings.MEDIA_ROOT, 'temp', shard_name)
+        with open(path, 'wb') as f:
+            f.write(encrypted_shard)
 
     def delete_file(self, file_path: str) -> None:
         if default_storage.exists(file_path):
