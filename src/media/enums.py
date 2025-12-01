@@ -15,6 +15,10 @@ class MediaEnum(Enum):
     FILE_TYPE_VIDEO = 'video'
     FILE_TYPE_IMAGE = 'image'
 
+    UNLOCK_PERMANENT = 'permanent'
+    UNLOCK_SESSION = 'session'
+    UNLOCK_24H = '24h'
+
     @staticmethod
     def statuses() -> Tuple:
         return (
@@ -35,4 +39,12 @@ class MediaEnum(Enum):
             (MediaEnum.FILE_TYPE_AUDIO.value, 'Audio'),
             (MediaEnum.FILE_TYPE_VIDEO.value, 'Video'),
             (MediaEnum.FILE_TYPE_IMAGE.value, 'Image'),
+        )
+
+    @staticmethod
+    def unlock_types() -> Tuple:
+        return (
+            (MediaEnum.UNLOCK_PERMANENT.value, 'Permanent'),
+            (MediaEnum.UNLOCK_SESSION.value, 'Session'),
+            (MediaEnum.UNLOCK_24H.value, '24H'),
         )

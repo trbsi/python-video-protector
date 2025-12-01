@@ -21,11 +21,11 @@ class ProcessMediaTask:
 
     def __init__(
             self,
-            remote_storage_service: RemoteStorageService or None = None,
-            compress_service: CompressMediaService or None = None,
-            thumbnail_service: ThumbnailService or None = None,
-            trailer_service: TrailerService or None = None,
-            sharding_service: ShardingService or None = None,
+            remote_storage_service: RemoteStorageService | None = None,
+            compress_service: CompressMediaService | None = None,
+            thumbnail_service: ThumbnailService | None = None,
+            trailer_service: TrailerService | None = None,
+            sharding_service: ShardingService | None = None,
     ):
         self.remote_storage_service = remote_storage_service or RemoteStorageService()
         self.compress_service = compress_service or CompressMediaService()
