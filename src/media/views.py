@@ -19,8 +19,12 @@ from src.user.models import User
 @require_GET
 def view_single_media(request: HttpRequest, id: int) -> HttpResponse:
     service = SingleMediaService()
-    media, wrapped_master_key_for_client, is_unlocked = service.get_single_media(media_id=id, user=request.user)
-    return render(request, 'single_media.html', {'media': media})
+    media_value_object = service.get_single_media(media_id=id, user=request.user)
+    return render(
+        request,
+        'single_media.html',
+        {'media_value_object': media_value_object}
+    )
 
 
 @require_GET

@@ -1,32 +1,32 @@
-function mediaActions() {
-  return {
-    liked: false,
-    likes: 1200,
-    comments: 345,
+function singleMediaComponent() {
+    return {
+        liked: false,
+        likes: 1200,
+        comments: 345,
 
-    like() {
-      this.liked = true;
-      this.likes += 1;
+        like() {
+            this.liked = true;
+            this.likes += 1;
 
-      // Animate the icon
-      const icon = event.currentTarget.querySelector('i');
-      icon.classList.add('scale-125');
-      setTimeout(() => icon.classList.remove('scale-125'), 150);
-    },
+            // Animate the icon
+            const icon = event.currentTarget.querySelector('i');
+            icon.classList.add('scale-125');
+            setTimeout(() => icon.classList.remove('scale-125'), 150);
+        },
 
-    comment() {
-      this.comments += 1;
+        comment() {
+            this.comments += 1;
 
-      // Animate the icon
-      const icon = event.currentTarget.querySelector('i');
-      icon.classList.add('scale-125');
-      setTimeout(() => icon.classList.remove('scale-125'), 150);
-    },
+            // Animate the icon
+            const icon = event.currentTarget.querySelector('i');
+            icon.classList.add('scale-125');
+            setTimeout(() => icon.classList.remove('scale-125'), 150);
+        },
 
-    report() {
-      alert("Reported!");
+        report() {
+            alert("Reported!");
+        }
     }
-  }
 }
 
 function resizeVideo() {
@@ -50,6 +50,8 @@ function resizeVideo() {
 }
 
 const player = videojs('my-video');
+
+// Resize player to fit viewable screen
 player.ready(function() {
     player.on('loadedmetadata', function() {
         resizeVideo();
@@ -58,3 +60,7 @@ player.ready(function() {
 
 // Re-run on window resize
 window.addEventListener('resize', resizeVideo);
+
+// Start feeding shard
+const mediaSource = new MediaSource();
+player.src({ src: URL.createObjectURL(mediaSource), type: 'video/mp4' });

@@ -49,7 +49,8 @@
         {% endif %}
     </div>
 </div>
-{% block javascript %}
+
+{% block javascript_global %}
 <script>
     $(document).ready(function() {
     function goToPage() {
@@ -78,4 +79,4 @@
     });
 });
 </script>
-{% endblock javascript %}
+{% endblock javascript_global %}

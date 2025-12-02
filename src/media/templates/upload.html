@@ -1,10 +1,10 @@
 {% extends "core/layout.html" %}
 {% load static %}
 
-{% block javascript %}
+{% block javascript_include %}
 <script src="{% static 'js/user/user_suggestion.js' %}"></script>
 <script src="{% static 'js/media/file_uploader.js' %}"></script>
-{% endblock javascript %}
+{% endblock javascript_include %}
 
 {% block content %}
 <!-- Upload View -->

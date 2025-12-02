@@ -12,8 +12,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx/certs:/etc/nginx/certs
       - ./nginx/vhost:/etc/nginx/vhost.d
-      - ./nginx/html:/usr/share/nginx/html
       - ./nginx/my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
+      - ../assets:/usr/share/nginx/html/static
     networks: [ protectapp-net ]
 
   django:

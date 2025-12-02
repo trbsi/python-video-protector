@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -123,9 +124,15 @@
     // Progressive enhancement note: add focus management and trapping if building a larger app.
 </script>
 
-
 <script src="{% static 'js/core/core.js' %}"></script>
-{% block javascript %}
-{% endblock javascript %}
+{% if TEMPLATE_APP_ENV == 'production' %}
+    <script src="{% static 'js/all.min.js' %}"></script>
+{% else %}
+    {% block javascript_include %}
+    {% endblock javascript_include %}
+{% endif %}
+
+{% block javascript_global %}
+{% endblock javascript_global %}
 </body>
 </html>

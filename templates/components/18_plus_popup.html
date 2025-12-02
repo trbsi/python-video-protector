@@ -1,7 +1,8 @@
 {% load static %}
-{% block javascript %}
+
+{% block javascript_include %}
 <script src="{% static 'js/core/18_plus_popup.js' %}"></script>
-{% endblock javascript %}
+{% endblock javascript_include %}
 
 <!-- Balance Popup Component -->
 <div x-cloak x-data="adultPopup()" x-init="showPopup()" class="relative z-1000">

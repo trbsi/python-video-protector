@@ -37,3 +37,14 @@ function myContentComponent(userSuggestionApi) {
         }
     }
 }
+
+ $(document).ready(function() {
+        $('.media-block input[type="checkbox"]').change(function() {
+            var parentDiv = $(this).closest('.media-block');
+            if ($(this).is(':checked')) {
+                parentDiv.addClass('bg-red-900');
+            } else {
+                parentDiv.removeClass('bg-red-900');
+            }
+        });
+    });

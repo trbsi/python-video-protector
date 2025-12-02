@@ -25,3 +25,15 @@
 - storage_metadata - is just metadata from Backblaze
 
 Expose only **nonce**, **shard**, **storage_metadata.file_path**.
+
+# Deployment
+
+```
+# 1. Clean previous builds
+docker exec -it protectapp-django poetry run python manage.py collect_javascript_command
+
+# 2. Collect static files
+python manage.py collectstatic --noinput --clear
+
+
+```

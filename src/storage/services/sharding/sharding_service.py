@@ -77,6 +77,7 @@ class ShardingService:
         # Now store both wrapped_master_key and wrap_nonce in your database
         file_metadata = media.file_metadata
         file_metadata['total_time_in_seconds'] = video_metadata_value_object.video_duration_in_seconds
+        file_metadata['codec_string'] = video_metadata_value_object.codec_string
 
         media.shards_metadata = shard_metadata_to_save
         media.master_key = wrapped_master_key

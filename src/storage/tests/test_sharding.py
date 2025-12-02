@@ -57,7 +57,8 @@ class TestSharding(TestCase):
                     duration=seconds_per_video,
                 )
             ],
-            video_duration_in_seconds=142
+            video_duration_in_seconds=142,
+            codec_string='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
         )
         # for: AESGCM.generate_key(bit_length=256)
         mock_aesgcm_generate_key.return_value = b'masterkeymasterkeymasterkey12345'
@@ -101,7 +102,11 @@ class TestSharding(TestCase):
         self.assertEqual(mock_media.master_key, b'wrappedmasterkey')
         self.assertEqual(
             mock_media.file_metadata,
-            {'file_info': 'file1', 'file_path': '/a/b/c', 'total_time_in_seconds': 142}
+            {
+                'file_info': 'file1',
+                'file_path': '/a/b/c',
+                'total_time_in_seconds': 142,
+                'codec_string': 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'}
         )
         self.assertEqual(mock_remote_storage_service.upload_bytes.call_count, 4)
 

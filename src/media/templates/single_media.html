@@ -2,30 +2,40 @@
 {% load static %}
 
 
-{% block javascript %}
-<script src="{% static 'js/media/single_media.js'%}"></script>
-{% endblock javascript %}
+{% block javascript_include %}
+<script src="{% static 'js/media/single_media.js' %}"></script>
+{% endblock javascript_include %}
 
 {% block content %}
 <div id="media-view" class="max-w-md mx-auto  "
-     x-data="mediaActions()">
-    <!-- Video.js player -->
+     x-data="singleMediaComponent()">
+    {% if media_value_object.is_unlocked %}
+    <video
+            id="my-video"
+            class="video-js vjs-default-skin "
+            controls
+            poster="{{media_value_object.media.get_thumbnail_url}}"
+            data-setup='{"fluid": true}'>
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that supports HTML5 video
+        </p>
+    </video>
+    {% else %}
     <video
             id="my-video"
             class="video-js vjs-default-skin "
             controls
             preload="metadata"
-            poster="{{media.get_thumbnail_url}}"
+            poster="{{media_value_object.media.get_thumbnail_url}}"
             data-setup='{"fluid": true}'>
-        <source src="{{media.get_file_url}}" type="video/mp4"/>
+        <source src="{{media_value_object.media.get_trailer_url}}" type="video/mp4"/>
         <p class="vjs-no-js">
             To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="https://videojs.com/html5-video-support/" target="_blank" class="text-blue-500 underline">
-                supports HTML5 video
-            </a>
+            web browser that supports HTML5 video
         </p>
     </video>
+    {% endif %}
 
     <!-- Action anchors -->
     <div class="flex justify-around mt-4 pb-4">
