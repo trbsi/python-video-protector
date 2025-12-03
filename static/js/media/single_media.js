@@ -64,30 +64,33 @@ const sessionKeyBytes = hexToBytes(sessionKey)
 const videoKeyBytes = hexToBytes(videoKey)
 const videoNonceBytes = hexToBytes(videoNonce)
 
-// Import session key as AES-GCM key
-const cryptoKey = await crypto.subtle.importKey(
-    "raw",
-    sessionKeyBytes,
-    "AES-GCM",
-    false,
-    ["decrypt"]
-);
+async function decryptKeys() {
+    // Import session key as AES-GCM key
+    const cryptoKey = await crypto.subtle.importKey(
+        "raw",
+        sessionKeyBytes,
+        "AES-GCM",
+        false,
+        ["decrypt"]
+    );
 
-// Decrypt the wrapped master key
-const masterKeyBytes = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv: wrapNonceBytes, additionalData: null },
-    cryptoKey,
-    wrappedMasterKeyBytes
-);
+    // Decrypt the wrapped master key
+    const masterKeyBytes = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: wrapNonceBytes, additionalData: null },
+        cryptoKey,
+        wrappedMasterKeyBytes
+    );
 
-// Import master key to decrypt shards
-const masterKey = await crypto.subtle.importKey(
-    "raw",
-    masterKeyBytes,
-    "AES-GCM",
-    false,
-    ["decrypt"]
-);
+    // Import master key to decrypt shards
+    const masterKey = await crypto.subtle.importKey(
+        "raw",
+        masterKeyBytes,
+        "AES-GCM",
+        false,
+        ["decrypt"]
+    );
+}
+
 
 async function fetchAndDecryptShard(shardMeta) {
     // 1. Fetch encrypted shard

@@ -10,10 +10,10 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/certs:/etc/nginx/certs
+      - protectapp_certificates:/etc/nginx/certs
       - ./nginx/vhost:/etc/nginx/vhost.d
       - ./nginx/my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
-      - ../assets:/usr/share/nginx/html/static
+      - ../assets:/usr/share/nginx/html/static # to be able to access assets via /static url (see ./vhost/mydomain.con)
     networks: [ protectapp-net ]
 
   django:
@@ -114,3 +114,4 @@ volumes:
   protectapp_mysql_data:
   protectapp_redis_data:
   protectapp_media:
+  protectapp_certificates:
