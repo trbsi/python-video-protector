@@ -58,6 +58,7 @@ class TestSharding(TestCase):
                 )
             ],
             video_duration_in_seconds=142,
+            seconds_per_shard=10,
             codec_string='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
         )
         # for: AESGCM.generate_key(bit_length=256)
@@ -106,6 +107,7 @@ class TestSharding(TestCase):
                 'file_info': 'file1',
                 'file_path': '/a/b/c',
                 'total_time_in_seconds': 142,
+                'seconds_per_shard': 10,
                 'codec_string': 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'}
         )
         self.assertEqual(mock_remote_storage_service.upload_bytes.call_count, 4)
@@ -120,19 +122,19 @@ class TestSharding(TestCase):
             [
                 call(
                     file_bytes=ANY,
-                    remote_file_path=f'video/media/444/shards/111/{shard_names[0]}'
+                    remote_file_path=f'video/user/444/media/111/shards/{shard_names[0]}'
                 ),
                 call(
                     file_bytes=ANY,
-                    remote_file_path=f'video/media/444/shards/111/{shard_names[1]}'
+                    remote_file_path=f'video/user/444/media/111/shards/{shard_names[1]}'
                 ),
                 call(
                     file_bytes=ANY,
-                    remote_file_path=f'video/media/444/shards/111/{shard_names[2]}'
+                    remote_file_path=f'video/user/444/media/111/shards/{shard_names[2]}'
                 ),
                 call(
                     file_bytes=ANY,
-                    remote_file_path=f'video/media/444/shards/111/{shard_names[3]}'
+                    remote_file_path=f'video/user/444/media/111/shards/{shard_names[3]}'
                 ),
             ]
         )

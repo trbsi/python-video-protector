@@ -125,7 +125,7 @@ class ShardingService:
         # Update uuid
         name[shard_index_place] = shard_name
 
-        # append mask[0](integer) at the end of 4a28
+        # append mask[0] (which is integer) at the end of 4a28
         mask_bit_index_place = 2
         mask_bit_name = name[mask_bit_index_place]
         mask_bit_name = f'{mask_bit_name}{mask[0]}'

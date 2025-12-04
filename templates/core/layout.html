@@ -37,8 +37,8 @@
             <!-- Desktop links -->
             <nav class="hidden md:flex items-center gap-8">
                 {% if user.is_authenticated %}
-                <a href="{% url 'media.my_content' %}" class="hover:text-blue-600">My content</a>
                 <a href="{% url 'media.upload' %}" class="hover:text-blue-600">Upload</a>
+                <a href="{% url 'media.my_content' %}" class="hover:text-blue-600">My content</a>
                 <a href="{% url 'account_logout' %}" class="hover:text-blue-600">Logout</a>
                 {% else %}
                 <a href="{% url 'account_login' %}" class="hover:text-blue-600">Login</a>
@@ -69,8 +69,8 @@
     <div id="mobile-menu" class="md:hidden hidden" aria-hidden="true">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
             {% if user.is_authenticated %}
-            <a href="{% url 'media.my_content' %}" class="block px-3 py-2 rounded-md">My content</a>
             <a href="{% url 'media.upload' %}" class="block px-3 py-2 rounded-md">Upload</a>
+            <a href="{% url 'media.my_content' %}" class="block px-3 py-2 rounded-md">My content</a>
             <a href="{% url 'account_logout' %}" class="block px-3 py-2 rounded-md">Logout</a>
             {% else %}
             <a href="{% url 'account_login' %}" class="block px-3 py-2 rounded-md">Login</a>

@@ -1,5 +1,3 @@
-import json
-
 from protectapp import settings
 from src.media.models import Media
 
@@ -28,7 +26,7 @@ class MediaValueObject:
     def get_session_key(self) -> str:
         return self.session_key.hex()
 
-    def get_video_metadata_as_json(self) -> str:
+    def get_video_metadata_as_json(self) -> dict:
         shards = self.media.shards_metadata
         metadata = {
             'total_time_in_seconds': self.media.get_total_time_in_seconds(),
@@ -45,4 +43,4 @@ class MediaValueObject:
             })
 
         metadata['shards'] = shard_metadata
-        return json.dumps(metadata)
+        return metadata

@@ -87,7 +87,7 @@ class SplitVideoService:
 
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         info = json.loads(result.stdout)
-        return int(info["format"]["duration"])
+        return int(float(info["format"]["duration"]))
 
     def _get_mp4_codec_string(self, video_path: str) -> str:
         """

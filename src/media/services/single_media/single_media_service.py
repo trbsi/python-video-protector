@@ -10,6 +10,7 @@ from src.user.models import User
 
 
 class SingleMediaService:
+
     def get_single_media(self, media_id: int, user: User | AnonymousUser) -> MediaValueObject:
         media = Media.objects.get(pk=media_id)
         if user.is_authenticated:
@@ -39,12 +40,12 @@ class SingleMediaService:
 
     def _decrypt_wrapped_master_key(self, media: Media) -> bytes:
         root_key = bytes.fromhex(settings.MEDIA_ROOT_ENCRYPT_KEY)
-        decrypted_master_key = (
-            AESGCM(root_key).decrypt(
+        aesgcm = AESGCM(root_key)
+
+        return (
+            aesgcm.decrypt(
                 nonce=media.nonce,
                 data=media.master_key,
                 associated_data=None
             )
         )
-
-        return decrypted_master_key

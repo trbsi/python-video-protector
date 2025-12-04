@@ -27,6 +27,7 @@ class Command(BaseCommand):
 
         # find files in directory
         path = os.path.join(settings.MEDIA_ROOT, 'temp')
+        path = os.path.join(settings.BASE_DIR, 'temp')
         folder = os.scandir(path)
 
         new_file_bytes = bytearray()
@@ -69,12 +70,18 @@ class Command(BaseCommand):
             # decrypt encrypted shard
             decrypted_file_bytes = aes_master.decrypt(nonce=file_nonce, data=encrypted_file_bytes, associated_data=None)
 
+            shard_bytes = bytearray()
             for byte in decrypted_file_bytes:
                 # Revert rotation
                 result = ((byte >> 3) | (byte << 5)) & 0xFF
                 # Revert XOR
                 result = result ^ mask
                 new_file_bytes.append(result)
+                shard_bytes.append(result)
+
+            new_file = f'{path}/{original_shard_name}.mp4'
+            with open(new_file, 'wb') as f:
+                f.write(bytes(shard_bytes))
 
         # Save new file
         new_file = f'{path}/original.mp4'

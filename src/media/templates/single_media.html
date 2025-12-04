@@ -3,10 +3,13 @@
 
 
 {% block javascript_global %}
-const videoMetadata = JSON.parse('{{media_value_object.get_video_metadata_as_json}}');
-const sessionKey = '{{media_value_object.get_session_key}}'
-const videoKey = '{{media_value_object.get_wrapped_master_key}}'
-const videoNonce = '{{media_value_object.get_wrap_nonce}}'
+{{ media_value_object.get_video_metadata_as_json|json_script:"video-meta" }}
+<script>
+    const videoMetadata = JSON.parse(document.getElementById("video-meta").textContent);
+    const sessionKey = '{{media_value_object.get_session_key}}'
+    const videoKey = '{{media_value_object.get_wrapped_master_key}}'
+    const videoNonce = '{{media_value_object.get_wrap_nonce}}'
+</script>
 {% endblock javascript_global %}
 
 {% block javascript_include %}
@@ -42,6 +45,10 @@ const videoNonce = '{{media_value_object.get_wrap_nonce}}'
             web browser that supports HTML5 video
         </p>
     </video>
+    <a href="#"
+       class="text-white bg-success box-border border border-transparent hover:bg-success-strong focus:ring-4 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+        <i class="ri-lock-unlock-line"></i> Unlock for ${{media.unlock_price}}
+    </a>
     {% endif %}
 
     <!-- Action anchors -->

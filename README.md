@@ -1,3 +1,26 @@
+# Local setup
+
+## Set up https certs
+
+Certificates already exist in `docker/nginx/local_certs`. This step is just in case.
+You need this to be able to run crypto in javascript
+
+``` 
+sudo apt install mkcert
+mkcert -install
+mkcert protectapp.loc
+```
+
+## Start docker
+
+1. Copy env files in root directory and ./docker directory
+2.
+
+``` 
+cd docker
+docker compose up -d --build
+```
+
 # Shards explanation
 
 ```
@@ -35,5 +58,7 @@ docker exec -it protectapp-django poetry run python manage.py collect_javascript
 # 2. Collect static files
 python manage.py collectstatic --noinput --clear
 
-
 ```
+
+
+
