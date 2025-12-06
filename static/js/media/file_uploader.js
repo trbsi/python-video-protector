@@ -58,8 +58,7 @@ function fileUploaderComponent(uploadApi, userSuggestionApi, myContentUrl) {
             }
 
             const xhr = new XMLHttpRequest();
-            console.log(getCsrfToken())
-            xhr.open("POST", uploadApi);
+                xhr.open("POST", uploadApi);
             xhr.setRequestHeader("X-CSRFToken", getCsrfToken());
 
             xhr.upload.addEventListener("progress", (e) => {

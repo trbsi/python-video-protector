@@ -12,7 +12,7 @@ from src.user.models import User
 class SingleMediaService:
 
     def get_single_media(self, media_id: int, user: User | AnonymousUser) -> MediaValueObject:
-        media = Media.objects.get(pk=media_id)
+        media = Media.objects.filter(id=media_id).filter(is_processed=True).get()
         if user.is_authenticated:
             is_unlocked = Unlock.objects.filter(user=user, media=media).exists()
         else:

@@ -11,6 +11,8 @@ from src.storage.services.sharding.video_metadata_value_object import VideoMetad
 
 
 class SplitVideoService:
+    OUTPUT_FORMAT = 'webm'
+
     def split_video_by_seconds(
             self,
             media: Media,
@@ -26,13 +28,18 @@ class SplitVideoService:
         video_duration = self._get_video_duration(local_file_path)
 
         # Split video
-        self._split_video(output_dir, input_path, seconds_per_video)
-
         # Get codec string
-        codec_string = self._get_mp4_codec_string(local_file_path)
+        if self.OUTPUT_FORMAT == 'mp4':
+            self._split_video_mp4(output_dir, input_path, seconds_per_video)
+            codec_string = self._get_codec_string_mp4(local_file_path)
+            shard_pattern = "shard_*.mp4"
+        elif self.OUTPUT_FORMAT == 'webm':
+            self._split_video_webm(output_dir, input_path, seconds_per_video)
+            codec_string = 'video/webm; codecs="vp8, vorbis"'
+            shard_pattern = "shard_*.webm"
 
         # Collect shards
-        shards = sorted(output_dir.glob("shard_*.mp4"))
+        shards = sorted(output_dir.glob(shard_pattern))
         number_of_shards = len(shards)
 
         meta = []
@@ -58,23 +65,38 @@ class SplitVideoService:
             codec_string=codec_string
         )
 
-    def _split_video(self, output_dir: Path, input_path: Path, seconds_per_video: int) -> None:
+    def _split_video_webm(self, output_dir, input_path, seconds_per_video):
+        output_pattern = str(f"{output_dir}/shard_%03d.webm")
+        subprocess.run([
+            "ffmpeg",
+            "-i", input_path,
+            "-c:v", "libvpx",
+            "-b:v", "1M",
+            "-crf", "10",
+            "-c:a", "libvorbis",
+            "-b:a", "128k",
+            "-f", "webm",
+            "-cluster_time_limit", "10000",
+            "-cluster_size_limit", "5000000",
+            output_pattern
+        ], check=True)
+
+    def _split_video_mp4(self, output_dir: Path, input_path: Path, seconds_per_video: int) -> None:
         # Example: output_000.mp4, output_001.mp4, ...
         output_pattern = str(f"{output_dir}/shard_%03d.mp4")
 
         cmd = [
             "ffmpeg",
             "-i", str(input_path),
-            "-c", "copy",  # Fast, no quality loss
+            "-c", "copy",
             "-map", "0",
             "-f", "segment",
             "-segment_time", str(seconds_per_video),
             "-segment_format", "mp4",
-            "-segment_list_type", "flat",  # Optional: creates segment list
             "-reset_timestamps", "1",
-            "-movflags", "+frag_keyframe+empty_moov+default_base_moof",  # MSE compatibility
+            "-movflags", "frag_keyframe+empty_moov+default_base_moof",  # MSE compatibility
             "-avoid_negative_ts", "make_zero",
-            "-flags", "+global_header",  # Ensures proper headers
+            "-flags", "+global_header",
             output_pattern
         ]
 
@@ -91,9 +113,9 @@ class SplitVideoService:
 
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         info = json.loads(result.stdout)
-        return int(info["format"]["duration"])
+        return int(float(info["format"]["duration"]))
 
-    def _get_mp4_codec_string(self, video_path) -> str:
+    def _get_codec_string_mp4(self, video_path) -> str:
         """
         Get MSE-compatible codec string from video file
         Returns: 'video/mp4; codecs="avc1.640028, mp4a.40.2"'

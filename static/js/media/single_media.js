@@ -123,7 +123,7 @@ async function fetchAndDecryptShard(shardMeta, videoMasterKey) {
         return result;
     });
 
-    // saveUnscrambledShard(unscrambled, shardMeta.name + '.mp4')
+//     saveUnscrambledShard(unscrambled, shardMeta.name + '.mp4')
     return unscrambled;
 }
 
@@ -177,53 +177,125 @@ window.addEventListener('resize', resizeVideo);
 
 // Start feeding shard
 const mediaSource = new MediaSource();
-player.src({src: URL.createObjectURL(mediaSource), type: 'video/mp4'});
+const videoUrl = URL.createObjectURL(mediaSource);
+
+// Set up VideoJS with MediaSource
+player.src({
+    src: videoUrl,
+    type: 'video/webm; codecs="vp8, vorbis"'  // Important for MSE
+});
+
+
+async function initializeSimplePlayer(videoMetadata) {
+    const video = videojs('my-video');
+
+    try {
+        // const shards = maskAndOrder(videoMetadata);
+        // const videoMasterKey = await decryptKeys();
+        // const firstShardBytes = await fetchAndDecryptShard(shards[0], videoMasterKey);
+        codec = 'video/mp4; codecs="avc1.4D401F, mp4a.40.2"';
+        codec = 'video/webm; codecs="vp9, opus"';
+        codec = 'video/webm; codecs="vp8, vorbis"';
+        const mediaSource = new MediaSource();
+        const source = URL.createObjectURL(mediaSource);
+        video.src({
+            src: source,
+            type: codec
+        });
+
+        shardUrl = 'https://protectapp.loc/static/output.webm';
+        if (MediaSource.isTypeSupported(codec)) {
+            console.log('Codec supported ✅');
+        } else {
+            console.log('Codec NOT supported ❌');
+        }
+        mediaSource.addEventListener('sourceopen', async () => {
+            const sourceBuffer = mediaSource.addSourceBuffer(codec);
+
+            // Always attach listener BEFORE appendBuffer
+            sourceBuffer.addEventListener('updateend', () => {
+                if (!sourceBuffer.updating && mediaSource.readyState === 'open') {
+                    mediaSource.endOfStream();
+                    video.play();
+                }
+            });
+
+            // Fetch shard
+            const arrayBuffer = await fetch(shardUrl).then(r => r.arrayBuffer());
+
+            // Optional: unscramble here
+            // arrayBuffer = unscramble(arrayBuffer);
+
+            sourceBuffer.appendBuffer(arrayBuffer);
+        });
+
+    } catch (e) {
+        console.error("Initialization error:", e);
+        video.src = "";
+    }
+}
+
+//initializeSimplePlayer(videoMetadata);
 
 mediaSource.addEventListener("sourceopen", async () => {
-    // Replace with the correct codec for your shard
     const sourceBuffer = mediaSource.addSourceBuffer(videoMetadata.codec);
 
-    // Suppose you already have the unscrambled shard as ArrayBuffer
-    const shards = maskAndOrder()
-    shard = shards[0];
-    const videoMasterKey = await decryptKeys();
-    const shardBytes = await fetchAndDecryptShard(shard, videoMasterKey);
+    const queue = [];
+    let ended = false;
+    let appending = false; // tracks if appendNext is currently processing
 
-    // Only append if MediaSource is open
-    if (mediaSource.readyState === "open") {
-        sourceBuffer.appendBuffer(shardBytes);
+    async function fetchShards() {
+        const videoMasterKey = await decryptKeys();
+        const shards = maskAndOrder();
+
+         for (const shard of shards) {
+         console.log('xxx')
+             const shardBytes = await fetchAndDecryptShard(shard, videoMasterKey);
+             queue.push(shardBytes);
+             // Try appending immediately if SourceBuffer is free
+             appendNext();
+         }
+
+        ended = true; // signal all shards have been queued
+        appendNext();  // in case queue is empty but ended
     }
 
-    // Wait for the append to finish before ending stream
-    sourceBuffer.addEventListener("updateend", () => {
-        if (mediaSource.readyState === "open") {
-            mediaSource.endOfStream();
+    function appendNext() {
+        // Prevent re-entrant calls
+        if (appending) return;
+        appending = true;
+
+        while (!sourceBuffer.updating && queue.length > 0) {
+            const shard = queue.shift();
+            try {
+                sourceBuffer.appendBuffer(shard);
+                console.log("Appending shard, queue length:", queue.length);
+                // Wait for 'updateend' before next append
+                break;
+            } catch (err) {
+                console.error("Failed to append shard:", err);
+                // Push back the shard and retry later
+                queue.unshift(shard);
+                break;
+            }
         }
-    }, {once: true});
+
+        // End MediaSource if all shards appended
+        if (!sourceBuffer.updating && queue.length === 0 && ended) {
+            try {
+                mediaSource.endOfStream();
+                console.log("All shards appended, MediaSource ended");
+            } catch (err) {
+                console.error("Failed to end MediaSource:", err);
+            }
+        }
+
+        appending = false;
+    }
+
+    // Listen for 'updateend' to append the next shard
+    sourceBuffer.addEventListener("updateend", appendNext);
+
+    // Start fetching and queuing shards
+    fetchShards();
 });
-// mediaSource.addEventListener("sourceopen", async () => {
-//     const sourceBuffer = mediaSource.addSourceBuffer(videoMetadata.codec);
-//     const videoMasterKey = await decryptKeys();
-//     const queue = [];
-//     let ended = false;
-//
-//     function appendNext() {
-//         if (!sourceBuffer.updating && queue.length > 0 && mediaSource.readyState === "open") {
-//             sourceBuffer.appendBuffer(queue.shift());
-//         } else if (!sourceBuffer.updating && queue.length === 0 && ended) {
-//             mediaSource.endOfStream();
-//         }
-//     }
-//
-//     sourceBuffer.addEventListener("updateend", appendNext);
-//
-//     // Start fetching shards without awaiting
-//     maskAndOrder().forEach(async (shardMeta) => {
-//         const shardBytes = await fetchAndDecryptShard(shardMeta, videoMasterKey);
-//         queue.push(shardBytes);
-//         appendNext();
-//     });
-//
-//     // Signal that all shards are queued eventually
-//     ended = true;
-// });

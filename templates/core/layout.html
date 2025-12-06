@@ -186,6 +186,9 @@
 </script>
 
 <script src="{% static 'js/core/core.js' %}"></script>
+{% block javascript_global %}
+{% endblock javascript_global %}
+
 {% if TEMPLATE_APP_ENV == 'production' %}
     <script src="{% static 'js/all.min.js' %}"></script>
 {% else %}
@@ -193,8 +196,6 @@
     {% endblock javascript_include %}
 {% endif %}
 
-{% block javascript_global %}
-{% endblock javascript_global %}
 <script>
     const btn = document.getElementById('accountDropdownBtn');
     const menu = document.getElementById('accountDropdownMenu');
