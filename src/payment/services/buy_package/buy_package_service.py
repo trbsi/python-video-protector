@@ -12,7 +12,7 @@ class BuyPackageService():
     def __init__(self, provider_service: PaymentProviderService | None = None):
         self.payment_provider_service = provider_service or PaymentProviderService()
 
-    def buy_package(self, user: User, package_id) -> CheckoutValueObject:
+    def buy_defined_package(self, user: User, package_id: int) -> CheckoutValueObject:
         package = Package.objects.get(id=package_id)
 
         value_object: CheckoutValueObject = self._create_checkout(
@@ -20,6 +20,10 @@ class BuyPackageService():
             price=package.price,
             amount=package.amount
         )
+
+        payment_history = PaymentHistory.objects.filter(provider_payment_id=value_object.provider_payment_id).first()
+        payment_history.content_object = package
+        payment_history.save()
 
         return value_object
 

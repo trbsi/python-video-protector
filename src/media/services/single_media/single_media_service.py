@@ -20,7 +20,7 @@ class SingleMediaService:
 
         if user.is_authenticated:
             unlock = Unlock.objects.filter(user=user, media=media).first()
-            unlock_type = unlock.unlock_type
+            unlock_type = unlock.unlock_type if unlock else MediaEnum.UNLOCK_LOCKED.value
             is_liked = Like.objects.filter(user=user, media=media).exists()
         else:
             unlock_type = MediaEnum.UNLOCK_LOCKED.value

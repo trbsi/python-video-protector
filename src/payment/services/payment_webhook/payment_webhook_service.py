@@ -1,6 +1,6 @@
 from src.media.enums import MediaEnum
 from src.media.models import Unlock
-from src.payment.models import PaymentHistory, Balance
+from src.payment.models import PaymentHistory, Balance, Package
 from src.payment.services.payment_providers.payment_provider_service import PaymentProviderService
 from src.payment.value_objects.payment_webhook_value_object import PaymentWebhookValueObject
 
@@ -25,7 +25,7 @@ class PaymentWebhookService:
             return
 
         foreign_object = payment_history.content_object
-        if foreign_object is None:
+        if isinstance(foreign_object, Package):
             balance = Balance.objects.get(user=payment_history.user)
             balance.balance += payment_history.amount
             balance.save()

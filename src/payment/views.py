@@ -60,7 +60,7 @@ def list_packages(request: HttpRequest) -> HttpResponse:
 @login_required
 def buy_single_package(request: HttpRequest, package_id: int) -> HttpResponse:
     service = BuyPackageService()
-    redirect_url = service.buy_package(request.user, package_id).redirect_url
+    redirect_url = service.buy_defined_package(request.user, package_id).redirect_url
     return redirect(redirect_url)
 
 
