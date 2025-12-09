@@ -1,42 +1,35 @@
 {% extends "core/layout.html" %}
 {% load static %}
-
 {% block content %}
-
-{% include "components/elements/back_button.html" with include_header=True %}
-
-<div class="p-6 flex flex-col items-center">
-    <!-- Balance Card -->
-    <div class="w-full max-w-md text-center mb-8">
-        <h2 class="text-gray-400 text-lg">Current Balance</h2>
-        <p class="text-5xl font-bold text-green-400 mt-2">{{balance.get_balance_as_string}}</p>
-    </div>
-
-    <!-- Spending List -->
-    <div class="w-full max-w-md space-y-4">
-        <!-- One Spending Item -->
-        {% for spending in spendings %}
-        <div class="flex items-center justify-between bg-gray-900 p-4 rounded-2xl shadow-md hover:bg-gray-800 transition">
-            <div>
-                <p class="text-lg font-semibold text-red-400">
-                    {% if current_user.is_creator %}
-                    {{spending.amount_for_creator}}
-                    {% else %}
-                    {{spending.amount_for_user}}
-                    {% endif %}
-                </p>
-                <p class="text-xs text-gray-400">{{spending.content_type}} (ID: {{spending.object_id}})</p>
-            </div>
-            <div>
-                <p class="text-gray-300 text-sm">by: {{spending.by_user.username}}</p>
-                <p class="text-gray-300 text-sm">on: {{spending.on_user.username}}</p>
-            </div>
-
+    {% include "components/elements/back_button.html" with include_header=True %}
+    <div class="p-6 flex flex-col items-center">
+        <!-- Balance Card -->
+        <div class="w-full max-w-md text-center mb-8">
+            <h2 class="text-gray-400 text-lg">Current Balance</h2>
+            <p class="text-5xl font-bold text-green-400 mt-2">{{ balance.get_balance_as_string }}</p>
         </div>
-        {% endfor %}
+        <!-- Spending List -->
+        <div class="w-full max-w-md space-y-4">
+            <!-- One Spending Item -->
+            {% for spending in spendings %}
+                <div class="flex items-center justify-between bg-gray-900 p-4 rounded-2xl shadow-md hover:bg-gray-800 transition">
+                    <div>
+                        <p class="text-lg font-semibold text-red-400">
+                            {% if current_user.is_creator %}
+                                {{ spending.amount_for_creator }}
+                            {% else %}
+                                {{ spending.amount_for_user }}
+                            {% endif %}
+                        </p>
+                        <p class="text-xs text-gray-400">{{ spending.content_type }} (ID: {{ spending.object_id }})</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-300 text-sm">by: {{ spending.by_user.username }}</p>
+                        <p class="text-gray-300 text-sm">on: {{ spending.on_user.username }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% include "components/elements/pagination.html" with page_obj=spendings %}
     </div>
-
-    {% include "components/elements/pagination.html" with page_obj=spendings %}
-</div>
-
 {% endblock content %}

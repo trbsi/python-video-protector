@@ -1,50 +1,43 @@
 {% extends 'core/layout.html' %}
-
 {% block content %}
-
-{% include "components/elements/back_button.html" with include_header=True %}
-
-<div class="p-5">
-    <!-- Heading -->
-    <h1 class="text-center text-2xl font-semibold text-white mb-4">
-        Complete These Steps to Get Started
-    </h1>
-
-    <!-- Step 1 -->
-    {% if is_creator_agreement_completed %}
-    <div class="mb-5 bg-green-900/30 border-green-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
-        <div class="text-5xl mb-3">📝</div>
-        <h2 class="text-lg font-bold text-white">Sign Performer Agreement</h2>
-        <p class="mt-2 text-sm text-gray-400">Step completed</p>
+    {% include "components/elements/back_button.html" with include_header=True %}
+    <div class="p-5">
+        <!-- Heading -->
+        <h1 class="text-center text-2xl font-semibold text-white mb-4">Complete These Steps to Get Started</h1>
+        <!-- Step 1 -->
+        {% if is_creator_agreement_completed %}
+            <div class="mb-5 bg-green-900/30 border-green-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
+                <div class="text-5xl mb-3">📝</div>
+                <h2 class="text-lg font-bold text-white">Sign Performer Agreement</h2>
+                <p class="mt-2 text-sm text-gray-400">Step completed</p>
+            </div>
+        {% else %}
+            <a href="{% url 'age_verification.creator_agreement' %}">
+                <div class="mb-5 bg-red-900/30 border-red-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
+                    <div class="text-5xl mb-3">📝</div>
+                    <h2 class="text-lg font-bold text-white">Click to Sign Performer Agreement</h2>
+                    <p class="mt-2 text-sm text-gray-400">Read and sign the agreement to continue.</p>
+                </div>
+            </a>
+        {% endif %}
+        <!-- Step 2 -->
+        {% if is_age_verification_completed %}
+            <div class="bg-green-900/30 border-green-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
+                <div class="text-5xl mb-3">🎂</div>
+                <h2 class="text-lg font-bold text-white">Age Verification</h2>
+                <p class="mt-2 text-sm text-gray-400">Step completed</p>
+            </div>
+        {% else %}
+            <a href="{% url 'age_verification.start_age_verification' %}">
+                <div class="bg-red-900/30 border-red-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
+                    <div class="text-5xl mb-3">🎂</div>
+                    {% if age_verification %}
+                        <h1 class="text-lg font-bold rounded-2xl border-2 text-red-500">Status: {{ age_verification.status }}</h1>
+                    {% endif %}
+                    <h2 class="text-lg font-bold text-white">Click to Age Verification</h2>
+                    <p class="mt-2 text-sm text-gray-400">Verify your identity and age with our KYC provider</p>
+                </div>
+            </a>
+        {% endif %}
     </div>
-    {% else %}
-    <a href="{% url 'age_verification.creator_agreement' %}">
-        <div class="mb-5 bg-red-900/30 border-red-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
-            <div class="text-5xl mb-3">📝</div>
-            <h2 class="text-lg font-bold text-white">Click to Sign Performer Agreement</h2>
-            <p class="mt-2 text-sm text-gray-400">Read and sign the agreement to continue.</p>
-        </div>
-    </a>
-    {% endif %}
-
-    <!-- Step 2 -->
-    {% if is_age_verification_completed %}
-    <div class="bg-green-900/30 border-green-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
-        <div class="text-5xl mb-3">🎂</div>
-        <h2 class="text-lg font-bold text-white">Age Verification</h2>
-        <p class="mt-2 text-sm text-gray-400">Step completed</p>
-    </div>
-    {% else %}
-    <a href="{% url 'age_verification.start_age_verification' %}">
-        <div class="bg-red-900/30 border-red-600 text-white relative w-full rounded-2xl border-2 p-6 text-center shadow-lg transition hover:scale-105">
-            <div class="text-5xl mb-3">🎂</div>
-            {% if age_verification%}
-            <h1 class="text-lg font-bold rounded-2xl border-2 text-red-500">Status: {{age_verification.status}}</h1>
-            {% endif %}
-            <h2 class="text-lg font-bold text-white">Click to Age Verification</h2>
-            <p class="mt-2 text-sm text-gray-400">Verify your identity and age with our KYC provider</p>
-        </div>
-    </a>
-    {% endif %}
-</div>
 {% endblock content %}

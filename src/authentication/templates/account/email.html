@@ -1,75 +1,80 @@
 {% extends "core/layout.html" %}
 {% load static i18n %}
-
 {% block head_title %}
     {% trans "Email Addresses" %}
 {% endblock head_title %}
-
 {% block content %}
-<div>
-    <h1 class="text-2xl font-semibold mb-4">{% trans "Email Addresses" %}</h1>
-
-    {% if emailaddresses %}
-        <p class="mb-4 text-gray-700">{% trans 'The following email addresses are associated with your account:' %}</p>
-
-        <form method="post" action="{% url 'account_email' %}" class="space-y-4">
-            {% csrf_token %}
-            {% for radio in emailaddress_radios %}
-                {% with emailaddress=radio.emailaddress %}
-                <div class="flex items-center justify-between p-3 border rounded hover:bg-gray-50">
-                    <label class="flex items-center space-x-3 cursor-pointer">
-                        <input type="radio" name="email" value="{{ emailaddress.email }}" {% if radio.checked %}checked{% endif %} class="form-radio h-4 w-4 text-blue-600">
-                        <span class="ml-2 font-medium">{{ emailaddress.email }}</span>
-                    </label>
-                    <div class="flex space-x-2">
-                        {% if emailaddress.verified %}
-                            <span class="px-2 py-0.5 text-xs bg-green-100 text-green-800 rounded">{% trans "Verified" %}</span>
-                        {% else %}
-                            <span class="px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded">{% trans "Unverified" %}</span>
-                        {% endif %}
-                        {% if emailaddress.primary %}
-                            <span class="px-2 py-0.5 text-xs bg-blue-100 text-blue-800 rounded">{% trans "Primary" %}</span>
-                        {% endif %}
-                    </div>
+    <div>
+        <h1 class="text-2xl font-semibold mb-4">{% trans "Email Addresses" %}</h1>
+        {% if emailaddresses %}
+            <p class="mb-4 text-gray-700">{% trans 'The following email addresses are associated with your account:' %}</p>
+            <form method="post" action="{% url 'account_email' %}" class="space-y-4">
+                {% csrf_token %}
+                {% for radio in emailaddress_radios %}
+                    {% with emailaddress=radio.emailaddress %}
+                        <div class="flex items-center justify-between p-3 border rounded hover:bg-gray-50">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="radio"
+                                       name="email"
+                                       value="{{ emailaddress.email }}"
+                                       {% if radio.checked %}checked{% endif %}
+                                       class="form-radio h-4 w-4 text-blue-600">
+                                <span class="ml-2 font-medium">{{ emailaddress.email }}</span>
+                            </label>
+                            <div class="flex space-x-2">
+                                {% if emailaddress.verified %}
+                                    <span class="px-2 py-0.5 text-xs bg-green-100 text-green-800 rounded">{% trans "Verified" %}</span>
+                                {% else %}
+                                    <span class="px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded">{% trans "Unverified" %}</span>
+                                {% endif %}
+                                {% if emailaddress.primary %}
+                                    <span class="px-2 py-0.5 text-xs bg-blue-100 text-blue-800 rounded">{% trans "Primary" %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endwith %}
+                {% endfor %}
+                <div class="flex space-x-2 mt-4">
+                    <button type="submit"
+                            name="action_primary"
+                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        {% trans "Make Primary" %}
+                    </button>
+                    <button type="submit"
+                            name="action_send"
+                            class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+                        {% trans "Re-send Verification" %}
+                    </button>
+                    <button type="submit"
+                            name="action_remove"
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        {% trans "Remove" %}
+                    </button>
                 </div>
-                {% endwith %}
-            {% endfor %}
-
-            <div class="flex space-x-2 mt-4">
-                <button type="submit" name="action_primary" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    {% trans "Make Primary" %}
+            </form>
+        {% else %}
+            {% include "account/snippets/warn_no_email.html" %}
+        {% endif %}
+        {% if can_add_email %}
+            <h2 class="text-xl font-semibold mt-8 mb-2">{% trans "Add Email Address" %}</h2>
+            <form method="post" action="{% url 'account_email' %}" class="space-y-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"
+                        name="action_add"
+                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    {% trans "Add Email" %}
                 </button>
-                <button type="submit" name="action_send" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
-                    {% trans "Re-send Verification" %}
-                </button>
-                <button type="submit" name="action_remove" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                    {% trans "Remove" %}
-                </button>
-            </div>
-        </form>
-    {% else %}
-        {% include "account/snippets/warn_no_email.html" %}
-    {% endif %}
-
-    {% if can_add_email %}
-        <h2 class="text-xl font-semibold mt-8 mb-2">{% trans "Add Email Address" %}</h2>
-        <form method="post" action="{% url 'account_email' %}" class="space-y-4">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" name="action_add" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                {% trans "Add Email" %}
-            </button>
-        </form>
-    {% endif %}
-</div>
+            </form>
+        {% endif %}
+    </div>
 {% endblock content %}
-
 {% block extra_body %}
-<script src="{% static 'account/js/account.js' %}"></script>
-<script src="{% static 'account/js/onload.js' %}"></script>
-<script type="application/json" data-allauth-onload="allauth.account.forms.manageEmailForm">
+    <script src="{% static 'account/js/account.js' %}"></script>
+    <script src="{% static 'account/js/onload.js' %}"></script>
+    <script type="application/json" data-allauth-onload="allauth.account.forms.manageEmailForm">
 {
     "i18n": {"confirmDelete": "{% trans 'Do you really want to remove the selected email address?' %}"}
 }
-</script>
+    </script>
 {% endblock extra_body %}

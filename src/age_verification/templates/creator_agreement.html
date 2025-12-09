@@ -1,64 +1,71 @@
 {% extends "core/layout.html" %}
-
 {% block content %}
-<div class="p-8 bg-black min-h-screen">
-    <header class="mb-6">
-        <h1 class="text-2xl font-semibold text-white">Performer Agreement &amp; Consent Form</h1>
-        <p class="mt-1 text-sm text-gray-400">
-            Version <span class="font-medium text-gray-200">1.0</span> — Please read carefully and
-            provide your consent at the end.
-        </p>
-    </header>
-
-    <div class="space-y-6">
-        <div>
-            <a href="{% url 'legal_documents' %}?document=creator_agreement" target="_blank" class="underline pb-5">
-                Click here to read Creator Agreement
-            </a>
+    <div class="p-8 bg-black min-h-screen">
+        <header class="mb-6">
+            <h1 class="text-2xl font-semibold text-white">Performer Agreement &amp; Consent Form</h1>
+            <p class="mt-1 text-sm text-gray-400">
+                Version <span class="font-medium text-gray-200">1.0</span> — Please read carefully and
+                provide your consent at the end.
+            </p>
+        </header>
+        <div class="space-y-6">
+            <div>
+                <a href="{% url 'legal_documents' %}?document=creator_agreement"
+                   target="_blank"
+                   class="underline pb-5">Click here to read Creator Agreement</a>
+            </div>
+            <!-- Consent Form -->
+            <section class="pt-6 border-t border-gray-700">
+                <form id="consent-form"
+                      action="{% url 'age_verification.creator_agreement' %}"
+                      method="post"
+                      class="space-y-4">
+                    {% csrf_token %}
+                    <div class="flex items-start gap-3">
+                        <input id="consent1"
+                               name="consent"
+                               type="checkbox"
+                               required
+                               class="h-4 w-4 rounded border-gray-600 bg-black text-indigo-500 focus:ring-indigo-400" />
+                        <label for="consent1" class="text-sm text-gray-300">
+                            I have read and understood the Performer Agreement &amp; Consent Form, and I agree to be bound
+                            by its terms.
+                        </label>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <input id="consent2"
+                               name="consent"
+                               type="checkbox"
+                               required
+                               class="h-4 w-4 rounded border-gray-600 bg-black text-indigo-500 focus:ring-indigo-400" />
+                        <label for="consent2" class="text-sm text-gray-300">
+                            I acknowledge and agree that my images will be used and displayed publicly on the website
+                        </label>
+                    </div>
+                    <div>
+                        <label for="signature" class="block text-sm font-medium text-gray-300">
+                            Type Full Legal Name as
+                            Signature *
+                        </label>
+                        <input id="signature"
+                               name="signature"
+                               type="text"
+                               required
+                               placeholder="Your full legal name"
+                               class="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-gray-100 px-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div class="flex items-center justify-end gap-3">
+                        <button type="submit"
+                                class="rounded-lg bg-gradient-to-r from-primary to-secondary w-full px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                            Agree &amp; Submit
+                        </button>
+                    </div>
+                </form>
+            </section>
         </div>
-
-        <!-- Consent Form -->
-        <section class="pt-6 border-t border-gray-700">
-            <form id="consent-form" action="{% url 'age_verification.creator_agreement' %}" method="post"
-                  class="space-y-4">
-                {% csrf_token %}
-                <div class="flex items-start gap-3">
-                    <input id="consent1" name="consent" type="checkbox" required
-                           class="h-4 w-4 rounded border-gray-600 bg-black text-indigo-500 focus:ring-indigo-400"/>
-                    <label for="consent1" class="text-sm text-gray-300">
-                        I have read and understood the Performer Agreement &amp; Consent Form, and I agree to be bound
-                        by its terms.
-                    </label>
-                </div>
-
-                <div class="flex items-start gap-3">
-                    <input id="consent2" name="consent" type="checkbox" required
-                           class="h-4 w-4 rounded border-gray-600 bg-black text-indigo-500 focus:ring-indigo-400"/>
-                    <label for="consent2" class="text-sm text-gray-300">
-                        I acknowledge and agree that my images will be used and displayed publicly on the website
-                    </label>
-                </div>
-
-
-                <div>
-                    <label for="signature" class="block text-sm font-medium text-gray-300">Type Full Legal Name as
-                        Signature *</label>
-                    <input id="signature" name="signature" type="text" required placeholder="Your full legal name"
-                           class="mt-1 block w-full rounded-lg border border-gray-600 bg-gray-900 text-gray-100 px-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-                </div>
-
-                <div class="flex items-center justify-end gap-3">
-                    <button type="submit"
-                            class="rounded-lg bg-gradient-to-r from-primary to-secondary w-full px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
-                        Agree &amp; Submit
-                    </button>
-                </div>
-            </form>
-        </section>
+        <footer class="mt-6 text-xs text-gray-500">
+            Contact: <a href="mailto:{{ TEMPLATE_SUPPORT_EMAIL }}"
+    class="underline text-gray-300 hover:text-gray-200">{{ TEMPLATE_SUPPORT_EMAIL }}</a>
+        </footer>
     </div>
-
-    <footer class="mt-6 text-xs text-gray-500">
-        Contact: <a href="mailto:{{TEMPLATE_SUPPORT_EMAIL}}" class="underline text-gray-300 hover:text-gray-200">{{TEMPLATE_SUPPORT_EMAIL}}</a>
-    </footer>
-</div>
 {% endblock content %}

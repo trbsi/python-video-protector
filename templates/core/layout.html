@@ -1,189 +1,182 @@
 {% load static %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="csrf-token" content="{{ csrf_token }}">
-
-    <title>{{TEMPLATE_APP_NAME}} | {% block title %}{% endblock title %}</title>
-
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-            rel="stylesheet"
-    />
-    <script src="https://unpkg.com/alpinejs" defer></script>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
-            integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-
-    <!-- Video js -->
-    <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet"/>
-    <script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
-
-
-    <!-- Toastr -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-</head>
-<body class="antialiased text-gray-800 bg-gray-50">
-
-<!-- NAV -->
-<header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <a href="/" class="flex items-center gap-3">
-                <span class="font-semibold text-lg logo">{{TEMPLATE_APP_NAME}}</span>
-            </a>
-
-            <!-- Desktop links -->
-            <nav class="hidden md:flex items-center gap-4 relative">
-                {% if user.is_authenticated %}
-                <a href="{% url 'media.upload' %}" class="tw flex items-center gap-1 hover:text-blue-600">
-                    <i class="ri-upload-line"></i> Upload
-                </a>
-                <a href="{% url 'media.my_content' %}" class="tw flex items-center gap-1 hover:text-blue-600">
-                    <i class="ri-file-list-line"></i> My Content
-                </a>
-
-                <!-- Clickable dropdown menu -->
-                <div class="relative">
-                    <button id="accountDropdownBtn"
-                            class="flex items-center gap-1 hover:text-blue-600 focus:outline-none">
-                        <i class="ri-user-line"></i> Account <i class="ri-arrow-down-s-line ml-1"></i>
-                    </button>
-
-                    <div id="accountDropdownMenu"
-                         class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden">
-                        <a href="{% url 'account_reset_password' %}"
-                           class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                            <i class="ri-key-line"></i> Reset Password
-                        </a>
-                        <a href="{% url 'account_email' %}"
-                           class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                            <i class="ri-mail-line"></i> Update Email
-                        </a>
-                        <hr class="my-1">
-                        <a href="{% url 'account_logout' %}"
-                           class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
-                            <i class="ri-logout-box-line"></i> Logout
-                        </a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="csrf-token" content="{{ csrf_token }}">
+        <title>{{ TEMPLATE_APP_NAME }} |
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+              rel="stylesheet" />
+        <script src="https://unpkg.com/alpinejs" defer></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+                integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+                crossorigin="anonymous"></script>
+        <!-- Video js -->
+        <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet" />
+        <script src="https://vjs.zencdn.net/8.23.4/video.min.js"></script>
+        <!-- Toastr -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+              rel="stylesheet">
+    </head>
+    <body class="antialiased text-gray-800 bg-gray-50">
+        <!-- NAV -->
+        <header class="bg-white shadow-md sticky top-0 z-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <a href="/" class="flex items-center gap-3">
+                        <span class="font-semibold text-lg logo">{{ TEMPLATE_APP_NAME }}</span>
+                    </a>
+                    <!-- Desktop links -->
+                    <nav class="hidden md:flex items-center gap-4 relative">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'media.upload' %}"
+                               class="tw flex items-center gap-1 hover:text-blue-600">
+                                <i class="ri-upload-line"></i> Upload
+                            </a>
+                            <a href="{% url 'media.my_content' %}"
+                               class="tw flex items-center gap-1 hover:text-blue-600">
+                                <i class="ri-file-list-line"></i> My Content
+                            </a>
+                            <!-- Clickable dropdown menu -->
+                            <div class="relative">
+                                <button id="accountDropdownBtn"
+                                        class="flex items-center gap-1 hover:text-blue-600 focus:outline-none">
+                                    <i class="ri-user-line"></i> Account <i class="ri-arrow-down-s-line ml-1"></i>
+                                </button>
+                                <div id="accountDropdownMenu"
+                                     class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden">
+                                    <a href="{% url 'account_reset_password' %}"
+                                       class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                        <i class="ri-key-line"></i> Reset Password
+                                    </a>
+                                    <a href="{% url 'account_email' %}"
+                                       class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                        <i class="ri-mail-line"></i> Update Email
+                                    </a>
+                                    <hr class="my-1">
+                                    <a href="{% url 'account_logout' %}"
+                                       class="tw flex items-center gap-2 px-4 py-2 hover:bg-gray-100">
+                                        <i class="ri-logout-box-line"></i> Logout
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'account_login' %}"
+                               class="tw flex items-center gap-1 hover:text-blue-600">
+                                <i class="ri-login-box-line"></i> Login
+                            </a>
+                            <a href="{% url 'account_signup' %}"
+                               class="tw flex items-center gap-1 hover:text-blue-600">
+                                <i class="ri-user-add-line"></i> Sign Up
+                            </a>
+                        {% endif %}
+                    </nav>
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="nav-toggle"
+                                aria-controls="mobile-menu"
+                                aria-expanded="false"
+                                class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            <svg id="icon-open"
+                                 class="w-6 h-6"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            <svg id="icon-close"
+                                 class="w-6 h-6 hidden"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-
-                {% else %}
-                <a href="{% url 'account_login' %}" class="tw flex items-center gap-1 hover:text-blue-600">
-                    <i class="ri-login-box-line"></i> Login
-                </a>
-                <a href="{% url 'account_signup' %}" class="tw flex items-center gap-1 hover:text-blue-600">
-                    <i class="ri-user-add-line"></i> Sign Up
-                </a>
-                {% endif %}
-            </nav>
-
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden">
-                <button id="nav-toggle" aria-controls="mobile-menu" aria-expanded="false"
-                        class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
-                    <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden hidden" aria-hidden="true">
-        <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3 bg-white">
-            {% if user.is_authenticated %}
-            <a href="{% url 'media.upload' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-blue-600 transition">
-                <i class="ri-upload-line mr-2 text-xl"></i> Upload
-            </a>
-            <a href="{% url 'media.my_content' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-green-600 transition">
-                <i class="ri-folder-line mr-2 text-xl"></i> My Content
-            </a>
-            <hr class="border-gray-200">
-            <a href="{% url 'account_reset_password' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-indigo-600 transition">
-                <i class="ri-lock-line mr-2 text-xl"></i> Reset Password
-            </a>
-            <a href="{% url 'account_email' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-indigo-600 transition">
-                <i class="ri-mail-line mr-2 text-xl"></i> Update Email
-            </a>
-
-            <hr class="border-gray-200">
-            <a href="{% url 'account_logout' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-red-600 transition">
-                <i class="ri-logout-box-line mr-2 text-xl"></i> Logout
-            </a>
-            {% else %}
-            <a href="{% url 'account_login' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-blue-600 transition">
-                <i class="ri-login-box-line mr-2 text-xl"></i> Login
-            </a>
-            <a href="{% url 'account_signup' %}"
-               class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-green-600 transition">
-                <i class="ri-user-add-line mr-2 text-xl"></i> Sign Up
-            </a>
-            {% endif %}
-        </div>
-    </div>
-
-
-</header>
-
-<!-- HERO -->
-<main>
-    <section class="container mx-auto  sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto bg-white p-4  shadow-sm">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    </section>
-    <!-- FOOTER -->
-    <footer class="mt-8 bg-teal-900 text-white border-t">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="text-sm">© <span id="year"></span> {{TEMPLATE_APP_NAME}}. All rights reserved.</div>
-                <div class="flex gap-4 text-sm">
-                    <a href="#" class="tw underline hover:text-primary">Privacy</a>
-                    <a href="#" class="tw underline hover:text-primary">Terms</a>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden" aria-hidden="true">
+                <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3 bg-white">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'media.upload' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-blue-600 transition">
+                            <i class="ri-upload-line mr-2 text-xl"></i> Upload
+                        </a>
+                        <a href="{% url 'media.my_content' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-green-600 transition">
+                            <i class="ri-folder-line mr-2 text-xl"></i> My Content
+                        </a>
+                        <hr class="border-gray-200">
+                        <a href="{% url 'account_reset_password' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-indigo-600 transition">
+                            <i class="ri-lock-line mr-2 text-xl"></i> Reset Password
+                        </a>
+                        <a href="{% url 'account_email' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-indigo-600 transition">
+                            <i class="ri-mail-line mr-2 text-xl"></i> Update Email
+                        </a>
+                        <hr class="border-gray-200">
+                        <a href="{% url 'account_logout' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-red-600 transition">
+                            <i class="ri-logout-box-line mr-2 text-xl"></i> Logout
+                        </a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-blue-600 transition">
+                            <i class="ri-login-box-line mr-2 text-xl"></i> Login
+                        </a>
+                        <a href="{% url 'account_signup' %}"
+                           class="tw flex items-center px-4 py-2 rounded-lg text-gray-800 hover:text-green-600 transition">
+                            <i class="ri-user-add-line mr-2 text-xl"></i> Sign Up
+                        </a>
+                    {% endif %}
                 </div>
             </div>
-        </div>
-    </footer>
-</main>
-
-
-<script src="{% static 'js/core/core.js' %}"></script>
-{% block javascript_global %}
-{% endblock javascript_global %}
-
-{% if TEMPLATE_APP_ENV == 'production' %}
-    <script src="{% static 'js/all.min.js' %}"></script>
-{% else %}
-    {% block javascript_include %}
-    {% endblock javascript_include %}
-{% endif %}
-
-<!-- Minimal JS for interactions (menu toggle + year) -->
-<script>
+        </header>
+        <!-- HERO -->
+        <main>
+            <section class="container mx-auto  sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto bg-white p-4  shadow-sm">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </section>
+            <!-- FOOTER -->
+            <footer class="mt-8 bg-teal-900 text-white border-t">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="text-sm">
+                            © <span id="year"></span> {{ TEMPLATE_APP_NAME }}. All rights reserved.
+                        </div>
+                        <div class="flex gap-4 text-sm">
+                            <a href="#" class="tw underline hover:text-primary">Privacy</a>
+                            <a href="#" class="tw underline hover:text-primary">Terms</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+        <script src="{% static 'js/core/core.js' %}"></script>
+        {% block javascript_global %}
+        {% endblock javascript_global %}
+        {% if TEMPLATE_APP_ENV == 'production' %}
+            <script src="{% static 'js/all.min.js' %}"></script>
+        {% else %}
+            {% block javascript_include %}
+            {% endblock javascript_include %}
+        {% endif %}
+        <!-- Minimal JS for interactions (menu toggle + year) -->
+        <script>
     // Mobile nav toggle
     const navToggle = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -202,9 +195,8 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Progressive enhancement note: add focus management and trapping if building a larger app.
-</script>
-
-<script>
+        </script>
+        <script>
     const btn = document.getElementById('accountDropdownBtn');
     const menu = document.getElementById('accountDropdownMenu');
 
@@ -218,9 +210,8 @@
             menu.classList.add('hidden');
         }
     });
-</script>
-
-<script>
+        </script>
+        <script>
     toastr.options.closeDuration = 10000;
     toastr.options.progressBar = true;
     toastr.options.escapeHtml = false;
@@ -238,6 +229,6 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-</script>
-</body>
+        </script>
+    </body>
 </html>

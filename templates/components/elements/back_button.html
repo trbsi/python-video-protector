@@ -1,17 +1,15 @@
 {% if include_header %}
-<div class="w-full">
-    <div class="flex items-center px-4 py-2">
-        <button
-                onclick="history.back()"
-                class="flex items-center text-white font-medium hover:text-gray-300"
-        >
-            <i class="ri-arrow-left-s-line ri-2x mr-1"></i>
-            <span>Back</span>
-        </button>
+    <div class="w-full">
+        <div class="flex items-center px-4 py-2">
+            <button onclick="history.back()"
+                    class="flex items-center text-white font-medium hover:text-gray-300">
+                <i class="ri-arrow-left-s-line ri-2x mr-1"></i>
+                <span>Back</span>
+            </button>
+        </div>
     </div>
-</div>
 {% else %}
-<button onclick="history.back()" class="text-white mr-2">
-    <i class="ri-arrow-left-s-line ri-2x"></i>
-</button>
+    <button onclick="history.back()" class="text-white mr-2">
+        <i class="ri-arrow-left-s-line ri-2x"></i>
+    </button>
 {% endif %}

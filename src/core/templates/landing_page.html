@@ -1,42 +1,32 @@
 {% load static %}
 <!-- https://uideck.com/templates/advanced -->
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
-
-<head>
-    <meta charset="utf-8">
-
-    <!--====== Title ======-->
-    <title>{{TEMPLATE_APP_NAME}}</title>
-
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{% static 'landing/images/favicon.ico' %}" type="image/png">
-
-
-    <!--====== Animate CSS ======-->
-    <link rel="stylesheet" href="{% static 'landing/css/animate.css' %}">
-
-
-    <!--====== Line Icons CSS ======-->
-    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css"/>
-
-
-    <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="{% static 'landing/css/bootstrap.4.5.2.min.css' %}">
-
-    <!--====== Default CSS ======-->
-    <link rel="stylesheet" href="{% static 'landing/css/default.css' %}">
-
-    <!--====== Style CSS ======-->
-    <link rel="stylesheet" href="{% static 'landing/css/style.css' %}">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
-            integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-
-    <style>
+    <head>
+        <meta charset="utf-8">
+        <!--====== Title ======-->
+        <title>{{ TEMPLATE_APP_NAME }}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--====== Favicon Icon ======-->
+        <link rel="shortcut icon"
+              href="{% static 'landing/images/favicon.ico' %}"
+              type="image/png">
+        <!--====== Animate CSS ======-->
+        <link rel="stylesheet" href="{% static 'landing/css/animate.css' %}">
+        <!--====== Line Icons CSS ======-->
+        <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+        <!--====== Bootstrap CSS ======-->
+        <link rel="stylesheet"
+              href="{% static 'landing/css/bootstrap.4.5.2.min.css' %}">
+        <!--====== Default CSS ======-->
+        <link rel="stylesheet" href="{% static 'landing/css/default.css' %}">
+        <!--====== Style CSS ======-->
+        <link rel="stylesheet" href="{% static 'landing/css/style.css' %}">
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+                integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+                crossorigin="anonymous"></script>
+        <style>
         .logo {
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: white; /* makes the text white */
@@ -58,954 +48,837 @@
                 width: 100%;
             }
         }
-    </style>
-
-</head>
-
-<body>
-<!--[if IE]>
+        </style>
+    </head>
+    <body>
+        <!--[if IE]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
     your browser</a> to improve your experience and security.</p>
 <![endif]-->
-
-<!--====== PRELOADER PART START ======-->
-
-<div class="preloader">
-    <div class="loader">
-        <div class="ytp-spinner">
-            <div class="ytp-spinner-container">
-                <div class="ytp-spinner-rotator">
-                    <div class="ytp-spinner-left">
-                        <div class="ytp-spinner-circle"></div>
-                    </div>
-                    <div class="ytp-spinner-right">
-                        <div class="ytp-spinner-circle"></div>
+        <!--====== PRELOADER PART START ======-->
+        <div class="preloader">
+            <div class="loader">
+                <div class="ytp-spinner">
+                    <div class="ytp-spinner-container">
+                        <div class="ytp-spinner-rotator">
+                            <div class="ytp-spinner-left">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
+                            <div class="ytp-spinner-right">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!--====== PRELOADER PART ENDS ======-->
-
-<!--====== HEADER PART START ======-->
-
-<section class="header_area">
-    <div class="header_navbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg">
-                        <a class="navbar-brand logo" href="/">
-                            {{TEMPLATE_APP_NAME}}
-                        </a>
-                    </nav> <!-- navbar -->
+        <!--====== PRELOADER PART ENDS ======-->
+        <!--====== HEADER PART START ======-->
+        <section class="header_area">
+            <div class="header_navbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav class="navbar navbar-expand-lg">
+                                <a class="navbar-brand logo" href="/">{{ TEMPLATE_APP_NAME }}</a>
+                            </nav>
+                            <!-- navbar -->
+                        </div>
+                    </div>
+                    <!-- row -->
                 </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </div> <!-- header navbar -->
-
-    <div id="home" class="header_hero d-lg-flex align-items-center gradient-bg">
-        <img class="shape shape-1" src="{% static 'landing/images/shape-1.svg' %}" alt="shape">
-        <img class="shape shape-2" src="{% static 'landing/images/shape-2.svg' %}" alt="shape">
-        <img class="shape shape-3" src="{% static 'landing/images/shape-3.svg' %}" alt="shape">
-
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="header_hero_content mt-45">
-                        <h2 class="header_title wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                            Automate your fan chats and posts — focus on content creation.
-                        </h2>
-                        <p class="wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.6s">
-                            The all-in-one automation tool for adult creators.
-                            Engage fans 24/7 and stay active without lifting a finger.
+                <!-- container -->
+            </div>
+            <!-- header navbar -->
+            <div id="home"
+                 class="header_hero d-lg-flex align-items-center gradient-bg">
+                <img class="shape shape-1"
+                     src="{% static 'landing/images/shape-1.svg' %}"
+                     alt="shape">
+                <img class="shape shape-2"
+                     src="{% static 'landing/images/shape-2.svg' %}"
+                     alt="shape">
+                <img class="shape shape-3"
+                     src="{% static 'landing/images/shape-3.svg' %}"
+                     alt="shape">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="header_hero_content mt-45">
+                                <h2 class="header_title wow fadeInLeftBig"
+                                    data-wow-duration="1.3s"
+                                    data-wow-delay="0.2s">
+                                    Automate your fan chats and posts — focus on content creation.
+                                </h2>
+                                <p class="wow fadeInLeftBig"
+                                   data-wow-duration="1.3s"
+                                   data-wow-delay="0.6s">
+                                    The all-in-one automation tool for adult creators.
+                                    Engage fans 24/7 and stay active without lifting a finger.
+                                </p>
+                            </div>
+                            <!-- header hero content -->
+                        </div>
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- container -->
+                <div class="header_image d-flex align-items-center">
+                    <div class="image wow fadeInRightBig "
+                         data-wow-duration="1.3s"
+                         data-wow-delay="1.8s"
+                         style="width: 100%">
+                        <img src="{% static 'landing/images/dots.svg' %}" alt="dots" class="dots">
+                    </div>
+                    <!-- image -->
+                </div>
+                <!-- header image -->
+            </div>
+            <!-- header hero -->
+        </section>
+        <!--====== HEADER PART ENDS ======-->
+        <!--====== FEATURES PART START ======-->
+        <section id="features" class="features_area pt-35 pb-80">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-7 col-sm-8">
+                        <div class="single_features mt-30 features_1 text-center wow fadeInUp"
+                             data-wow-duration="1.3s"
+                             data-wow-delay="0.2s">
+                            <div class="features_icon">
+                                <i class="lni lni-message-2"></i>
+                            </div>
+                            <div class="features_content">
+                                <h4 class="features_title">Auto Replies</h4>
+                                <p>Constantly replying to fans manually</p>
+                            </div>
+                        </div>
+                        <!-- single featuresow -->
+                    </div>
+                    <div class="col-lg-4 col-md-7 col-sm-8">
+                        <div class="single_features mt-30 features_2 text-center wow fadeInUp"
+                             data-wow-duration="1.3s"
+                             data-wow-delay="0.5s">
+                            <div class="features_icon">
+                                <i class="lni lni-camera-movie-1"></i>
+                            </div>
+                            <div class="features_content">
+                                <h4 class="features_title">Auto Posting</h4>
+                                <p>Forgetting to post or losing momentum</p>
+                            </div>
+                        </div>
+                        <!-- single featuresow -->
+                    </div>
+                    <div class="col-lg-4 col-md-7 col-sm-8">
+                        <div class="single_features mt-30 features_3 text-center wow fadeInUp"
+                             data-wow-duration="1.3s"
+                             data-wow-delay="0.9s">
+                            <div class="features_icon">
+                                <i class="lni lni-hourglass"></i>
+                            </div>
+                            <div class="features_content">
+                                <h4 class="features_title">Save time</h4>
+                                <p>Spending more time managing than creating</p>
+                            </div>
+                        </div>
+                        <!-- single featuresow -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </section>
+        <!--====== FEATURES PART ENDS ======-->
+        <!--====== APP FEATURES PART START ======-->
+        <section id="app_features">
+        </section>
+        <!--====== APP FEATURES PART ENDS ======-->
+        <!--====== VIDEO PART START ======-->
+        <!--====== PRICNG PART START ======-->
+        <section id="pricing" class="pricing_area mt-80 pt-30 pb-80">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="section_title text-center pb-25">
+                            <h4 class="title">Main features</h4>
+                        </div>
+                        <!-- section title -->
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-8 col-sm-10">
+                        <div class="single_pricing text-center pricing_color_1 mt-30 wow fadeInUp"
+                             data-wow-duration="1.3s"
+                             data-wow-delay="0.2s">
+                            <div class="pricing_top_bar mb-5">
+                                <h5 class="pricing_title">Message Automation</h5>
+                                <i class="lni lni-message-2"></i>
+                            </div>
+                            <div class="pricing_list">
+                                <ul>
+                                    <li>AI trained to sext for you</li>
+                                    <li>Boosts engagement and fan loyalty</li>
+                                    <li>Instant replies = more tips and conversations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- single pricing -->
+                    </div>
+                    <div class="col-lg-4 col-md-8 col-sm-10">
+                        <div class="single_pricing text-center pricing_active pricing_color_2 mt-30 wow fadeInUp"
+                             data-wow-duration="1.3s"
+                             data-wow-delay="0.5s">
+                            <div class="pricing_top_bar mb-5">
+                                <h5 class="pricing_title">Smart Auto-Posting</h5>
+                                <i class="lni lni-camera-movie-1"></i>
+                            </div>
+                            <div class="pricing_list">
+                                <ul>
+                                    <li>Upload once, we handle scheduling</li>
+                                    <li>Recycle top-performing content automatically</li>
+                                    <li>Never miss the best posting times</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- single pricing -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </section>
+        <!--====== PRICNG PART ENDS ======-->
+        <!--====== DOWNLOAD APP PART START ======-->
+        <section id="download" class="download_app_area pt-80 mb-80">
+            <div class="container">
+                <div class="download_app">
+                    <div class="download_shape">
+                        <img src="{% static 'landing/images/shape-5.svg' %}" alt="shape">
+                    </div>
+                    <div class="download_shape_2">
+                        <img src="{% static 'landing/images/shape-6.png' %}" alt="shape">
+                    </div>
+                    <div class="download_app_content">
+                        <h3 class="download_title">More time. More money. More freedom</h3>
+                        <p>Creators using our automation tools save hours daily and see higher engagement.</p>
+                        <p>
+                            Unlike other fan platforms or schedulers, we’re the only automation tool built specifically for adult
+                            creators — combining AI chat and posting into one simple system
                         </p>
-                    </div> <!-- header hero content -->
+                    </div>
+                    <!-- download app content -->
                 </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-        <div class="header_image d-flex align-items-center">
-            <div class="image wow fadeInRightBig " data-wow-duration="1.3s" data-wow-delay="1.8s" style="width: 100%">
-                <img src="{% static 'landing/images/dots.svg' %}" alt="dots" class="dots">
-            </div> <!-- image -->
-        </div> <!-- header image -->
-    </div> <!-- header hero -->
-</section>
-
-<!--====== HEADER PART ENDS ======-->
-
-<!--====== FEATURES PART START ======-->
-
-<section id="features" class="features_area pt-35 pb-80">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-7 col-sm-8">
-                <div class="single_features mt-30 features_1 text-center wow fadeInUp" data-wow-duration="1.3s"
-                     data-wow-delay="0.2s">
-                    <div class="features_icon">
-                        <i class="lni lni-message-2"></i>
-                    </div>
-                    <div class="features_content">
-                        <h4 class="features_title">Auto Replies</h4>
-                        <p>Constantly replying to fans manually</p>
-                    </div>
-                </div> <!-- single featuresow -->
+                <!-- download app -->
             </div>
-            <div class="col-lg-4 col-md-7 col-sm-8">
-                <div class="single_features mt-30 features_2 text-center wow fadeInUp" data-wow-duration="1.3s"
-                     data-wow-delay="0.5s">
-                    <div class="features_icon">
-                        <i class="lni lni-camera-movie-1"></i>
-                    </div>
-                    <div class="features_content">
-                        <h4 class="features_title">Auto Posting</h4>
-                        <p>Forgetting to post or losing momentum</p>
-                    </div>
-                </div> <!-- single featuresow -->
-            </div>
-            <div class="col-lg-4 col-md-7 col-sm-8">
-                <div class="single_features mt-30 features_3 text-center wow fadeInUp" data-wow-duration="1.3s"
-                     data-wow-delay="0.9s">
-                    <div class="features_icon">
-                        <i class="lni lni-hourglass"></i>
-                    </div>
-                    <div class="features_content">
-                        <h4 class="features_title">Save time</h4>
-                        <p>Spending more time managing than creating</p>
-                    </div>
-                </div> <!-- single featuresow -->
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</section>
-
-<!--====== FEATURES PART ENDS ======-->
-
-
-<!--====== APP FEATURES PART START ======-->
-
-<section id="app_features">
-
-</section>
-
-<!--====== APP FEATURES PART ENDS ======-->
-
-<!--====== VIDEO PART START ======-->
-
-
-<!--====== PRICNG PART START ======-->
-
-<section id="pricing" class="pricing_area mt-80 pt-30 pb-80">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="section_title text-center pb-25">
-                    <h4 class="title">Main features</h4>
-                </div> <!-- section title -->
-            </div>
-        </div> <!-- row -->
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-8 col-sm-10">
-                <div class="single_pricing text-center pricing_color_1 mt-30 wow fadeInUp" data-wow-duration="1.3s"
-                     data-wow-delay="0.2s">
-                    <div class="pricing_top_bar mb-5">
-                        <h5 class="pricing_title">Message Automation</h5>
-                        <i class="lni lni-message-2"></i>
-                    </div>
-                    <div class="pricing_list">
-                        <ul>
-                            <li>AI trained to sext for you</li>
-                            <li>Boosts engagement and fan loyalty</li>
-                            <li>Instant replies = more tips and conversations</li>
-                        </ul>
-                    </div>
-                </div>  <!-- single pricing -->
-            </div>
-            <div class="col-lg-4 col-md-8 col-sm-10">
-                <div class="single_pricing text-center pricing_active pricing_color_2 mt-30 wow fadeInUp"
-                     data-wow-duration="1.3s" data-wow-delay="0.5s">
-                    <div class="pricing_top_bar mb-5">
-                        <h5 class="pricing_title">Smart Auto-Posting</h5>
-                        <i class="lni lni-camera-movie-1"></i>
-                    </div>
-                    <div class="pricing_list">
-                        <ul>
-                            <li> Upload once, we handle scheduling</li>
-                            <li> Recycle top-performing content automatically</li>
-                            <li>Never miss the best posting times</li>
-                        </ul>
-                    </div>
-                </div>  <!-- single pricing -->
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</section>
-
-<!--====== PRICNG PART ENDS ======-->
-
-<!--====== DOWNLOAD APP PART START ======-->
-
-<section id="download" class="download_app_area pt-80 mb-80">
-    <div class="container">
-        <div class="download_app">
-            <div class="download_shape">
-                <img src="{% static 'landing/images/shape-5.svg' %}" alt="shape">
-            </div>
-            <div class="download_shape_2">
-                <img src="{% static 'landing/images/shape-6.png' %}" alt="shape">
-            </div>
-            <div class="download_app_content">
-                <h3 class="download_title">More time. More money. More freedom</h3>
-                <p>Creators using our automation tools save hours daily and see higher engagement.</p>
-                <p>Unlike other fan platforms or schedulers, we’re the only automation tool built specifically for adult
-                    creators — combining AI chat and posting into one simple system</p>
-            </div>  <!-- download app content -->
-        </div> <!-- download app -->
-    </div> <!-- container -->
-</section>
-
-<!--====== DOWNLOAD APP PART ENDS ======-->
-
-<section id="faq" class="faq_area pt-80 pb-80">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="container my-5">
-                    <h2 class="mb-4 font-weight-bold text-dark">Compliance & Safety</h2>
-
-                    <div id="faqCompliance" class="accordion">
-
-                        <!-- Q1 -->
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseOne"
-                                            aria-expanded="true"
-                                            aria-controls="collapseOne"
-                                    >
-                                        Does {{TEMPLATE_APP_NAME}} verify creators' age and identity?
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div
-                                    id="collapseOne"
-                                    class="collapse"
-                                    aria-labelledby="headingOne"
-                                    data-parent="#faqCompliance"
-                            >
-                                <div class="card-body">
-                                    Yes. {{TEMPLATE_APP_NAME}} takes compliance seriously and verifies that every creator
-                                    is of legal age. We use a trusted third-party identity-verification
-                                    provider to securely confirm each creator’s age and identity before
-                                    they can upload or monetize content. This ensures a compliant and safe
-                                    environment for all participants.
+            <!-- container -->
+        </section>
+        <!--====== DOWNLOAD APP PART ENDS ======-->
+        <section id="faq" class="faq_area pt-80 pb-80">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="container my-5">
+                            <h2 class="mb-4 font-weight-bold text-dark">Compliance & Safety</h2>
+                            <div id="faqCompliance" class="accordion">
+                                <!-- Q1 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseOne"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                Does {{ TEMPLATE_APP_NAME }} verify creators' age and identity?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne"
+                                         class="collapse"
+                                         aria-labelledby="headingOne"
+                                         data-parent="#faqCompliance">
+                                        <div class="card-body">
+                                            Yes. {{ TEMPLATE_APP_NAME }} takes compliance seriously and verifies that every creator
+                                            is of legal age. We use a trusted third-party identity-verification
+                                            provider to securely confirm each creator’s age and identity before
+                                            they can upload or monetize content. This ensures a compliant and safe
+                                            environment for all participants.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseTwo"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                How does {{ TEMPLATE_APP_NAME }} handle illegal content?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo"
+                                         class="collapse"
+                                         aria-labelledby="headingTwo"
+                                         data-parent="#faqCompliance">
+                                        <div class="card-body">
+                                            {{ TEMPLATE_APP_NAME }} has zero tolerance for illegal or prohibited material. All user
+                                            reports are reviewed manually by our moderation team. Any content
+                                            confirmed to be illegal is removed immediately, and the associated
+                                            account may be suspended or banned. When required, {{ TEMPLATE_APP_NAME }} cooperates
+                                            with law enforcement to ensure compliance and community safety.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseThree"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseThree">
+                                                What are {{ TEMPLATE_APP_NAME }}'s content moderation rules?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree"
+                                         class="collapse"
+                                         aria-labelledby="headingThree"
+                                         data-parent="#faqCompliance">
+                                        <div class="card-body">
+                                            Our moderation process uses manual
+                                            review to ensure accuracy. We focus on removing illegal or
+                                            non-consensual material, underage content, and anything violating
+                                            applicable laws or platform guidelines.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseFour"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseFour">
+                                                How can I report a user or creator?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFour"
+                                         class="collapse"
+                                         aria-labelledby="headingFour"
+                                         data-parent="#faqCompliance">
+                                        <div class="card-body">
+                                            You can report a user or creator directly from their profile page
+                                            using the <strong>Report</strong> button. Once a report is submitted,
+                                            our moderation team manually reviews it and takes appropriate action.
+                                            We encourage everyone to report any suspicious, unsafe, or abusive
+                                            content to keep {{ TEMPLATE_APP_NAME }} a respectful space for all users.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Q2 -->
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseTwo"
-                                            aria-expanded="false"
-                                            aria-controls="collapseTwo"
-                                    >
-                                        How does {{TEMPLATE_APP_NAME}} handle illegal content?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseTwo"
-                                    class="collapse"
-                                    aria-labelledby="headingTwo"
-                                    data-parent="#faqCompliance"
-                            >
-                                <div class="card-body">
-                                    {{TEMPLATE_APP_NAME}} has zero tolerance for illegal or prohibited material. All user
-                                    reports are reviewed manually by our moderation team. Any content
-                                    confirmed to be illegal is removed immediately, and the associated
-                                    account may be suspended or banned. When required, {{TEMPLATE_APP_NAME}} cooperates
-                                    with law enforcement to ensure compliance and community safety.
+                        <div class="container my-5">
+                            <h2 class="mb-4 font-weight-bold text-dark">Creators</h2>
+                            <div id="faqCreators" class="accordion">
+                                <!-- Q1 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingC1">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseC1"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseC1">
+                                                How do I become a creator on {{ TEMPLATE_APP_NAME }}?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseC1"
+                                         class="collapse"
+                                         aria-labelledby="headingC1"
+                                         data-parent="#faqCreators">
+                                        <div class="card-body">
+                                            To become a creator on {{ TEMPLATE_APP_NAME }}, simply register for an account, review
+                                            and sign the Creator Agreement, and complete our identity and age
+                                            verification process. Once approved, you’ll gain access to upload
+                                            tools, and earning features that let you share and monetize
+                                            your content safely.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingC2">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseC2"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseC2">How do payouts work?</button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseC2"
+                                         class="collapse"
+                                         aria-labelledby="headingC2"
+                                         data-parent="#faqCreators">
+                                        <div class="card-body">
+                                            {{ TEMPLATE_APP_NAME }} processes payouts once per month through our secure partner,
+                                            CCBill. When your earnings reach the minimum payout threshold, you’ll
+                                            automatically receive your funds via your chosen payment method.
+                                            Detailed reports of your balance and payout history are available in
+                                            your creator dashboard.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingC3">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseC3"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseC3">
+                                                What percentage does {{ TEMPLATE_APP_NAME }} take?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseC3"
+                                         class="collapse"
+                                         aria-labelledby="headingC3"
+                                         data-parent="#faqCreators">
+                                        <div class="card-body">
+                                            {{ TEMPLATE_APP_NAME }} retains a 20% platform fee on creator earnings. This helps cover
+                                            hosting, payment processing, moderation, and platform maintenance. The
+                                            remaining 80% of all earnings goes directly to creators.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingC4">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseC4"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseC4">
+                                                Are there content restrictions for creators?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseC4"
+                                         class="collapse"
+                                         aria-labelledby="headingC4"
+                                         data-parent="#faqCreators">
+                                        <div class="card-body">
+                                            Yes. While creators enjoy creative freedom, {{ TEMPLATE_APP_NAME }} strictly prohibits
+                                            any illegal or non-consensual material. All uploads must comply with
+                                            local laws and {{ TEMPLATE_APP_NAME }}’s content standards. Our moderation team reviews
+                                            reported content to ensure the platform remains safe and lawful for
+                                            everyone.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q5 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingC5">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseC5"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseC5">
+                                                Can I upload both photos and videos?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseC5"
+                                         class="collapse"
+                                         aria-labelledby="headingC5"
+                                         data-parent="#faqCreators">
+                                        <div class="card-body">
+                                            Absolutely. {{ TEMPLATE_APP_NAME }} supports both photo and video uploads. You can mix
+                                            formats to create engaging content and connect with your audience in
+                                            whichever way suits your style best.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Q3 -->
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseThree"
-                                            aria-expanded="false"
-                                            aria-controls="collapseThree"
-                                    >
-                                        What are {{TEMPLATE_APP_NAME}}'s content moderation rules?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseThree"
-                                    class="collapse"
-                                    aria-labelledby="headingThree"
-                                    data-parent="#faqCompliance"
-                            >
-                                <div class="card-body">
-                                    Our moderation process uses manual
-                                    review to ensure accuracy. We focus on removing illegal or
-                                    non-consensual material, underage content, and anything violating
-                                    applicable laws or platform guidelines.
+                        <div class="container my-5">
+                            <h2 class="mb-4 font-weight-bold text-dark">Payments and Security</h2>
+                            <div id="faqPayments" class="accordion">
+                                <!-- Q1 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingP1">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseP1"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseP1">How do users pay for content?</button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseP1"
+                                         class="collapse"
+                                         aria-labelledby="headingP1"
+                                         data-parent="#faqPayments">
+                                        <div class="card-body">
+                                            Users purchase and spend <strong>virtual coins</strong> within {{ TEMPLATE_APP_NAME }} to
+                                            unlock premium videos or photos, tip creators, and access exclusive
+                                            features. Using coins keeps payments simple, private, and flexible for
+                                            both users and creators.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingP2">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseP2"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseP2">
+                                                What payment methods are supported?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseP2"
+                                         class="collapse"
+                                         aria-labelledby="headingP2"
+                                         data-parent="#faqPayments">
+                                        <div class="card-body">
+                                            Coins can be purchased using major credit or debit cards through our
+                                            secure payment provider. Transactions are processed quickly and safely
+                                            so you can start using your coins immediately.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingP3">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseP3"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseP3">
+                                                Is my payment information secure?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseP3"
+                                         class="collapse"
+                                         aria-labelledby="headingP3"
+                                         data-parent="#faqPayments">
+                                        <div class="card-body">
+                                            Yes. {{ TEMPLATE_APP_NAME }} does <strong>not</strong> store or process your credit-card
+                                            details directly. All transactions are handled by PCI-compliant,
+                                            third-party payment processors, ensuring your financial data stays
+                                            encrypted and protected.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingP4">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseP4"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseP4">
+                                                How often are payouts sent to creators?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseP4"
+                                         class="collapse"
+                                         aria-labelledby="headingP4"
+                                         data-parent="#faqPayments">
+                                        <div class="card-body">
+                                            Payouts to creators are sent once per month through our partner
+                                            <strong>CCBill</strong>. Your monthly balance is automatically
+                                            processed at the end of each cycle, and payments are transferred
+                                            directly to your registered payout account.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q5 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingP5">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseP5"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseP5">
+                                                What currency does {{ TEMPLATE_APP_NAME }} use?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseP5"
+                                         class="collapse"
+                                         aria-labelledby="headingP5"
+                                         data-parent="#faqPayments">
+                                        <div class="card-body">
+                                            {{ TEMPLATE_APP_NAME }} uses its own internal virtual currency called
+                                            <strong>Coins</strong>. Users buy coins with <strong>USD</strong> and
+                                            then spend them within the app. This system simplifies payments,
+                                            allows global participation, and protects user privacy.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Q4 -->
-                        <div class="card">
-                            <div class="card-header" id="headingFour">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseFour"
-                                            aria-expanded="false"
-                                            aria-controls="collapseFour"
-                                    >
-                                        How can I report a user or creator?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseFour"
-                                    class="collapse"
-                                    aria-labelledby="headingFour"
-                                    data-parent="#faqCompliance"
-                            >
-                                <div class="card-body">
-                                    You can report a user or creator directly from their profile page
-                                    using the <strong>Report</strong> button. Once a report is submitted,
-                                    our moderation team manually reviews it and takes appropriate action.
-                                    We encourage everyone to report any suspicious, unsafe, or abusive
-                                    content to keep {{TEMPLATE_APP_NAME}} a respectful space for all users.
+                        <div class="container my-5">
+                            <h2 class="mb-4 font-weight-bold text-dark">General Questions</h2>
+                            <div id="faqGeneral" class="accordion">
+                                <!-- Q1 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingG1">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseG1"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseG1">
+                                                What is {{ TEMPLATE_APP_NAME }}?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseG1"
+                                         class="collapse"
+                                         aria-labelledby="headingG1"
+                                         data-parent="#faqGeneral">
+                                        <div class="card-body">
+                                            {{ TEMPLATE_APP_NAME }} is a short-form video and photo sharing platform designed for
+                                            adult content creators. It provides tools for creators to share their
+                                            work, grow their audience, and monetize safely within a compliant and
+                                            secure environment. Users can discover creators, unlock exclusive
+                                            content, and support them directly using virtual coins.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingG2">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseG2"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseG2">
+                                                Is {{ TEMPLATE_APP_NAME }} free to use?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseG2"
+                                         class="collapse"
+                                         aria-labelledby="headingG2"
+                                         data-parent="#faqGeneral">
+                                        <div class="card-body">
+                                            Yes. {{ TEMPLATE_APP_NAME }} is completely free to join and explore. Users can browse
+                                            creators, follow profiles, and engage with public content at no cost.
+                                            However, some videos and photos are marked as premium and can be
+                                            unlocked using virtual coins. This helps support creators directly
+                                            while keeping the platform accessible for everyone.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingG3">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseG3"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseG3">
+                                                Can anyone join {{ TEMPLATE_APP_NAME }} as a creator?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseG3"
+                                         class="collapse"
+                                         aria-labelledby="headingG3"
+                                         data-parent="#faqGeneral">
+                                        <div class="card-body">
+                                            Yes. Anyone who is at least <strong>18 years old</strong> and can
+                                            verify their identity is welcome to become a creator on {{ TEMPLATE_APP_NAME }}. We
+                                            encourage creators from all backgrounds and countries to share their
+                                            work, as long as they meet the legal and compliance requirements of
+                                            the platform.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="container my-5">
-                    <h2 class="mb-4 font-weight-bold text-dark">Creators</h2>
-
-                    <div id="faqCreators" class="accordion">
-
-                        <!-- Q1 -->
-                        <div class="card">
-                            <div class="card-header" id="headingC1">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseC1"
-                                            aria-expanded="true"
-                                            aria-controls="collapseC1"
-                                    >
-                                        How do I become a creator on {{TEMPLATE_APP_NAME}}?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseC1"
-                                    class="collapse"
-                                    aria-labelledby="headingC1"
-                                    data-parent="#faqCreators"
-                            >
-                                <div class="card-body">
-                                    To become a creator on {{TEMPLATE_APP_NAME}}, simply register for an account, review
-                                    and sign the Creator Agreement, and complete our identity and age
-                                    verification process. Once approved, you’ll gain access to upload
-                                    tools, and earning features that let you share and monetize
-                                    your content safely.
+                        <div class="container my-5">
+                            <h2 class="mb-4 font-weight-bold text-dark">Account and Registration</h2>
+                            <div id="faqAccount" class="accordion">
+                                <!-- Q1 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingA1">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseA1"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseA1">How do I create an account?</button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseA1"
+                                         class="collapse"
+                                         aria-labelledby="headingA1"
+                                         data-parent="#faqAccount">
+                                        <div class="card-body">
+                                            Creating an account on {{ TEMPLATE_APP_NAME }} is simple. Just click the
+                                            <strong>Register</strong> button on the home page, provide your email
+                                            and password, and confirm your account. Once registered, you can
+                                            browse content, follow creators, and participate in the community.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingA2">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseA2"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseA2">
+                                                I forgot my password – what should I do?
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseA2"
+                                         class="collapse"
+                                         aria-labelledby="headingA2"
+                                         data-parent="#faqAccount">
+                                        <div class="card-body">
+                                            If you forget your password, you can reset it on the login page by
+                                            clicking the <strong>Forgot Password</strong> link. Follow the
+                                            instructions to receive a secure reset email and create a new
+                                            password.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingA3">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseA3"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseA3">How can I verify my account?</button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseA3"
+                                         class="collapse"
+                                         aria-labelledby="headingA3"
+                                         data-parent="#faqAccount">
+                                        <div class="card-body">
+                                            To verify your account as a creator, log in and select
+                                            <strong>Become a Creator</strong> from your profile menu. You’ll then
+                                            complete age and identity verification. Once approved, your account
+                                            will have creator privileges and access to monetization tools.
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="card">
+                                    <div class="card-header" id="headingA4">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed text-left w-100"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseA4"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseA4">Can I delete my account?</button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseA4"
+                                         class="collapse"
+                                         aria-labelledby="headingA4"
+                                         data-parent="#faqAccount">
+                                        <div class="card-body">
+                                            Yes. You can delete your account at any time. When you delete your
+                                            account, all associated content, personal data, and creator information
+                                            will be permanently removed from {{ TEMPLATE_APP_NAME }}. Please ensure you back up any
+                                            data you may need before confirming deletion.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Q2 -->
-                        <div class="card">
-                            <div class="card-header" id="headingC2">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseC2"
-                                            aria-expanded="false"
-                                            aria-controls="collapseC2"
-                                    >
-                                        How do payouts work?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseC2"
-                                    class="collapse"
-                                    aria-labelledby="headingC2"
-                                    data-parent="#faqCreators"
-                            >
-                                <div class="card-body">
-                                    {{TEMPLATE_APP_NAME}} processes payouts once per month through our secure partner,
-                                    CCBill. When your earnings reach the minimum payout threshold, you’ll
-                                    automatically receive your funds via your chosen payment method.
-                                    Detailed reports of your balance and payout history are available in
-                                    your creator dashboard.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q3 -->
-                        <div class="card">
-                            <div class="card-header" id="headingC3">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseC3"
-                                            aria-expanded="false"
-                                            aria-controls="collapseC3"
-                                    >
-                                        What percentage does {{TEMPLATE_APP_NAME}} take?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseC3"
-                                    class="collapse"
-                                    aria-labelledby="headingC3"
-                                    data-parent="#faqCreators"
-                            >
-                                <div class="card-body">
-                                    {{TEMPLATE_APP_NAME}} retains a 20% platform fee on creator earnings. This helps cover
-                                    hosting, payment processing, moderation, and platform maintenance. The
-                                    remaining 80% of all earnings goes directly to creators.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q4 -->
-                        <div class="card">
-                            <div class="card-header" id="headingC4">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseC4"
-                                            aria-expanded="false"
-                                            aria-controls="collapseC4"
-                                    >
-                                        Are there content restrictions for creators?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseC4"
-                                    class="collapse"
-                                    aria-labelledby="headingC4"
-                                    data-parent="#faqCreators"
-                            >
-                                <div class="card-body">
-                                    Yes. While creators enjoy creative freedom, {{TEMPLATE_APP_NAME}} strictly prohibits
-                                    any illegal or non-consensual material. All uploads must comply with
-                                    local laws and {{TEMPLATE_APP_NAME}}’s content standards. Our moderation team reviews
-                                    reported content to ensure the platform remains safe and lawful for
-                                    everyone.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q5 -->
-                        <div class="card">
-                            <div class="card-header" id="headingC5">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseC5"
-                                            aria-expanded="false"
-                                            aria-controls="collapseC5"
-                                    >
-                                        Can I upload both photos and videos?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseC5"
-                                    class="collapse"
-                                    aria-labelledby="headingC5"
-                                    data-parent="#faqCreators"
-                            >
-                                <div class="card-body">
-                                    Absolutely. {{TEMPLATE_APP_NAME}} supports both photo and video uploads. You can mix
-                                    formats to create engaging content and connect with your audience in
-                                    whichever way suits your style best.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="container my-5">
-                    <h2 class="mb-4 font-weight-bold text-dark">Payments and Security</h2>
-
-                    <div id="faqPayments" class="accordion">
-
-                        <!-- Q1 -->
-                        <div class="card">
-                            <div class="card-header" id="headingP1">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseP1"
-                                            aria-expanded="true"
-                                            aria-controls="collapseP1"
-                                    >
-                                        How do users pay for content?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseP1"
-                                    class="collapse"
-                                    aria-labelledby="headingP1"
-                                    data-parent="#faqPayments"
-                            >
-                                <div class="card-body">
-                                    Users purchase and spend <strong>virtual coins</strong> within {{TEMPLATE_APP_NAME}} to
-                                    unlock premium videos or photos, tip creators, and access exclusive
-                                    features. Using coins keeps payments simple, private, and flexible for
-                                    both users and creators.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q2 -->
-                        <div class="card">
-                            <div class="card-header" id="headingP2">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseP2"
-                                            aria-expanded="false"
-                                            aria-controls="collapseP2"
-                                    >
-                                        What payment methods are supported?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseP2"
-                                    class="collapse"
-                                    aria-labelledby="headingP2"
-                                    data-parent="#faqPayments"
-                            >
-                                <div class="card-body">
-                                    Coins can be purchased using major credit or debit cards through our
-                                    secure payment provider. Transactions are processed quickly and safely
-                                    so you can start using your coins immediately.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q3 -->
-                        <div class="card">
-                            <div class="card-header" id="headingP3">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseP3"
-                                            aria-expanded="false"
-                                            aria-controls="collapseP3"
-                                    >
-                                        Is my payment information secure?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseP3"
-                                    class="collapse"
-                                    aria-labelledby="headingP3"
-                                    data-parent="#faqPayments"
-                            >
-                                <div class="card-body">
-                                    Yes. {{TEMPLATE_APP_NAME}} does <strong>not</strong> store or process your credit-card
-                                    details directly. All transactions are handled by PCI-compliant,
-                                    third-party payment processors, ensuring your financial data stays
-                                    encrypted and protected.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q4 -->
-                        <div class="card">
-                            <div class="card-header" id="headingP4">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseP4"
-                                            aria-expanded="false"
-                                            aria-controls="collapseP4"
-                                    >
-                                        How often are payouts sent to creators?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseP4"
-                                    class="collapse"
-                                    aria-labelledby="headingP4"
-                                    data-parent="#faqPayments"
-                            >
-                                <div class="card-body">
-                                    Payouts to creators are sent once per month through our partner
-                                    <strong>CCBill</strong>. Your monthly balance is automatically
-                                    processed at the end of each cycle, and payments are transferred
-                                    directly to your registered payout account.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q5 -->
-                        <div class="card">
-                            <div class="card-header" id="headingP5">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseP5"
-                                            aria-expanded="false"
-                                            aria-controls="collapseP5"
-                                    >
-                                        What currency does {{TEMPLATE_APP_NAME}} use?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseP5"
-                                    class="collapse"
-                                    aria-labelledby="headingP5"
-                                    data-parent="#faqPayments"
-                            >
-                                <div class="card-body">
-                                    {{TEMPLATE_APP_NAME}} uses its own internal virtual currency called
-                                    <strong>Coins</strong>. Users buy coins with <strong>USD</strong> and
-                                    then spend them within the app. This system simplifies payments,
-                                    allows global participation, and protects user privacy.
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-
-                <div class="container my-5">
-                    <h2 class="mb-4 font-weight-bold text-dark">General Questions</h2>
-
-                    <div id="faqGeneral" class="accordion">
-
-                        <!-- Q1 -->
-                        <div class="card">
-                            <div class="card-header" id="headingG1">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseG1"
-                                            aria-expanded="true"
-                                            aria-controls="collapseG1"
-                                    >
-                                        What is {{TEMPLATE_APP_NAME}}?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseG1"
-                                    class="collapse"
-                                    aria-labelledby="headingG1"
-                                    data-parent="#faqGeneral"
-                            >
-                                <div class="card-body">
-                                    {{TEMPLATE_APP_NAME}} is a short-form video and photo sharing platform designed for
-                                    adult content creators. It provides tools for creators to share their
-                                    work, grow their audience, and monetize safely within a compliant and
-                                    secure environment. Users can discover creators, unlock exclusive
-                                    content, and support them directly using virtual coins.
-                                </div>
-                            </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </section>
+        <!--====== FOOTER PART START ======-->
+        <section id="footer" class="footer_area pt-10 pb-25">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="footer_copyright text-center mt-55">
+                            <p>
+                                Copyright &copy; 2025 {{ TEMPLATE_APP_NAME }} | Support: <a href="{% url 'contact' %}"  class="underline">Contact</a>
+                            </p>
+                            <p>
+                                <a href="{% url 'terms_of_use' %}" target="_blank" class="underline">Terms of use</a> |
+                                <a href="{% url 'privacy_policy' %}" target="_blank" class="underline">Privacy policy</a> |
+                                <a href="{% url 'legal_documents' %}" target="_blank" class="underline">Legal documents</a>
+                            </p>
                         </div>
-
-                        <!-- Q2 -->
-                        <div class="card">
-                            <div class="card-header" id="headingG2">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseG2"
-                                            aria-expanded="false"
-                                            aria-controls="collapseG2"
-                                    >
-                                        Is {{TEMPLATE_APP_NAME}} free to use?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseG2"
-                                    class="collapse"
-                                    aria-labelledby="headingG2"
-                                    data-parent="#faqGeneral"
-                            >
-                                <div class="card-body">
-                                    Yes. {{TEMPLATE_APP_NAME}} is completely free to join and explore. Users can browse
-                                    creators, follow profiles, and engage with public content at no cost.
-                                    However, some videos and photos are marked as premium and can be
-                                    unlocked using virtual coins. This helps support creators directly
-                                    while keeping the platform accessible for everyone.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q3 -->
-                        <div class="card">
-                            <div class="card-header" id="headingG3">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseG3"
-                                            aria-expanded="false"
-                                            aria-controls="collapseG3"
-                                    >
-                                        Can anyone join {{TEMPLATE_APP_NAME}} as a creator?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseG3"
-                                    class="collapse"
-                                    aria-labelledby="headingG3"
-                                    data-parent="#faqGeneral"
-                            >
-                                <div class="card-body">
-                                    Yes. Anyone who is at least <strong>18 years old</strong> and can
-                                    verify their identity is welcome to become a creator on {{TEMPLATE_APP_NAME}}. We
-                                    encourage creators from all backgrounds and countries to share their
-                                    work, as long as they meet the legal and compliance requirements of
-                                    the platform.
-                                </div>
-                            </div>
-                        </div>
-
+                        <!-- footer copyright -->
                     </div>
                 </div>
-
-                <div class="container my-5">
-                    <h2 class="mb-4 font-weight-bold text-dark">Account and Registration</h2>
-
-                    <div id="faqAccount" class="accordion">
-
-                        <!-- Q1 -->
-                        <div class="card">
-                            <div class="card-header" id="headingA1">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseA1"
-                                            aria-expanded="true"
-                                            aria-controls="collapseA1"
-                                    >
-                                        How do I create an account?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseA1"
-                                    class="collapse"
-                                    aria-labelledby="headingA1"
-                                    data-parent="#faqAccount"
-                            >
-                                <div class="card-body">
-                                    Creating an account on {{TEMPLATE_APP_NAME}} is simple. Just click the
-                                    <strong>Register</strong> button on the home page, provide your email
-                                    and password, and confirm your account. Once registered, you can
-                                    browse content, follow creators, and participate in the community.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q2 -->
-                        <div class="card">
-                            <div class="card-header" id="headingA2">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseA2"
-                                            aria-expanded="false"
-                                            aria-controls="collapseA2"
-                                    >
-                                        I forgot my password – what should I do?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseA2"
-                                    class="collapse"
-                                    aria-labelledby="headingA2"
-                                    data-parent="#faqAccount"
-                            >
-                                <div class="card-body">
-                                    If you forget your password, you can reset it on the login page by
-                                    clicking the <strong>Forgot Password</strong> link. Follow the
-                                    instructions to receive a secure reset email and create a new
-                                    password.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q3 -->
-                        <div class="card">
-                            <div class="card-header" id="headingA3">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseA3"
-                                            aria-expanded="false"
-                                            aria-controls="collapseA3"
-                                    >
-                                        How can I verify my account?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseA3"
-                                    class="collapse"
-                                    aria-labelledby="headingA3"
-                                    data-parent="#faqAccount"
-                            >
-                                <div class="card-body">
-                                    To verify your account as a creator, log in and select
-                                    <strong>Become a Creator</strong> from your profile menu. You’ll then
-                                    complete age and identity verification. Once approved, your account
-                                    will have creator privileges and access to monetization tools.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Q4 -->
-                        <div class="card">
-                            <div class="card-header" id="headingA4">
-                                <h5 class="mb-0">
-                                    <button
-                                            class="btn btn-link collapsed text-left w-100"
-                                            type="button"
-                                            data-toggle="collapse"
-                                            data-target="#collapseA4"
-                                            aria-expanded="false"
-                                            aria-controls="collapseA4"
-                                    >
-                                        Can I delete my account?
-                                    </button>
-                                </h5>
-                            </div>
-                            <div
-                                    id="collapseA4"
-                                    class="collapse"
-                                    aria-labelledby="headingA4"
-                                    data-parent="#faqAccount"
-                            >
-                                <div class="card-body">
-                                    Yes. You can delete your account at any time. When you delete your
-                                    account, all associated content, personal data, and creator information
-                                    will be permanently removed from {{TEMPLATE_APP_NAME}}. Please ensure you back up any
-                                    data you may need before confirming deletion.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+                <!-- row -->
             </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</section>
-
-<!--====== FOOTER PART START ======-->
-
-<section id="footer" class="footer_area pt-10 pb-25">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-
-                <div class="footer_copyright text-center mt-55">
-                    <p>Copyright &copy; 2025 {{TEMPLATE_APP_NAME}} | Support: <a href="{% url 'contact' %}"  class="underline">Contact</a></p>
-                    <p>
-                        <a href="{% url 'terms_of_use' %}" target="_blank" class="underline">Terms of use</a> |
-                        <a href="{% url 'privacy_policy' %}" target="_blank" class="underline">Privacy policy</a> |
-                        <a href="{% url 'legal_documents' %}" target="_blank" class="underline">Legal documents</a>
-                    </p>
-                </div> <!-- footer copyright -->
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-</section>
-
-<!--====== FOOTER PART ENDS ======-->
-
-<!--====== BACK TOP TOP PART START ======-->
-
-<a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
-
-<!--====== BACK TOP TOP PART ENDS ======-->
-
-<!--====== PART START ======-->
-
-<!--
+            <!-- container -->
+        </section>
+        <!--====== FOOTER PART ENDS ======-->
+        <!--====== BACK TOP TOP PART START ======-->
+        <a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
+        <!--====== BACK TOP TOP PART ENDS ======-->
+        <!--====== PART START ======-->
+        <!--
     <section class="">
         <div class="container">
             <div class="row">
@@ -1016,30 +889,21 @@
         </div>
     </section>
 -->
-
-<!--====== PART ENDS ======-->
-
-
-<!--====== Jquery js ======-->
-<script src="{% static 'landing/js/vendor/jquery-1.12.4.min.js' %}"></script>
-<script src="{% static 'landing/js/vendor/modernizr-3.7.1.min.js' %}"></script>
-
-<!--====== Bootstrap js ======-->
-<script src="{% static 'landing/js/popper.min.js' %}"></script>
-<script src="{% static 'landing/js/bootstrap.4.5.2.min.js' %}"></script>
-
-
-<!--====== Scrolling Nav js ======-->
-<script src="{% static 'landing/js/jquery.easing.min.js' %}"></script>
-<script src="{% static 'landing/js/scrolling-nav.js' %}"></script>
-
-<!--====== wow js ======-->
-<script src="{% static 'landing/js/wow.min.js' %}"></script>
-
-<!--====== Main js ======-->
-<script src="{% static 'landing/js/main.js' %}"></script>
-
-<script>
+        <!--====== PART ENDS ======-->
+        <!--====== Jquery js ======-->
+        <script src="{% static 'landing/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static 'landing/js/vendor/modernizr-3.7.1.min.js' %}"></script>
+        <!--====== Bootstrap js ======-->
+        <script src="{% static 'landing/js/popper.min.js' %}"></script>
+        <script src="{% static 'landing/js/bootstrap.4.5.2.min.js' %}"></script>
+        <!--====== Scrolling Nav js ======-->
+        <script src="{% static 'landing/js/jquery.easing.min.js' %}"></script>
+        <script src="{% static 'landing/js/scrolling-nav.js' %}"></script>
+        <!--====== wow js ======-->
+        <script src="{% static 'landing/js/wow.min.js' %}"></script>
+        <!--====== Main js ======-->
+        <script src="{% static 'landing/js/main.js' %}"></script>
+        <script>
     $(document).ready(function () {
       $(".faq-question").click(function () {
         const answer = $(this).next(".faq-answer");
@@ -1052,7 +916,6 @@
         icon.toggleClass("rotate-180");
       });
     });
-</script>
-</body>
-
+        </script>
+    </body>
 </html>

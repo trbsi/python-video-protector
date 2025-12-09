@@ -1,6 +1,5 @@
 {% extends "core/layout.html" %}
 {% load static %}
-
 {% if media_value_object.is_unlocked %}
     {% block javascript_global %}
         {{ media_value_object.get_video_metadata_as_json|json_script:"video-meta" }}
@@ -12,14 +11,12 @@
         </script>
     {% endblock javascript_global %}
 {% endif %}
-
 {% block javascript_include %}
     {% if media_value_object.is_unlocked %}
         <script src="{% static 'js/media/video_player.js' %}"></script>
     {% endif %}
     <script src="{% static 'js/media/single_media.js' %}"></script>
 {% endblock javascript_include %}
-
 {% block content %}
     <div id="media-view"
          class="max-w-md mx-auto  "

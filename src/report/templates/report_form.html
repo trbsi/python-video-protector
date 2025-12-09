@@ -1,42 +1,30 @@
 <!-- Overlay + Form -->
-<div
-        x-cloak
-        x-show="showReportForm"
-        x-transition.opacity.duration.300ms
-        class="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
->
+<div x-cloak
+     x-show="showReportForm"
+     x-transition.opacity.duration.300ms
+     class="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
     <!-- Modal box -->
-    <div
-            @click.away="closeReportForm()"
-            x-transition.scale.duration.300ms
-            class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative m-3"
-    >
+    <div @click.away="closeReportForm()"
+         x-transition.scale.duration.300ms
+         class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative m-3">
         <!-- Header -->
         <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <i class="ri-flag-2-line text-red-500 text-2xl"></i>
             Report
         </h3>
-
         <!-- Textarea -->
-        <textarea
-                x-model="reportDescription"
-                class="text-black w-full border border-gray-300 focus:border-red-400 focus:ring-2 focus:ring-red-200 p-3 rounded-lg mb-4 text-sm resize-none"
-                rows="5"
-                placeholder="Describe the issue..."
-        ></textarea>
-
+        <textarea x-model="reportDescription"
+                  class="text-black w-full border border-gray-300 focus:border-red-400 focus:ring-2 focus:ring-red-200 p-3 rounded-lg mb-4 text-sm resize-none"
+                  rows="5"
+                  placeholder="Describe the issue..."></textarea>
         <!-- Actions -->
         <div class="flex justify-end gap-3">
-            <button
-                    @click="closeReportForm()"
-                    class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition text-sm font-medium"
-            >
+            <button @click="closeReportForm()"
+                    class="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition text-sm font-medium">
                 Cancel
             </button>
-            <button
-                    @click="submitReport()"
-                    class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition text-sm font-medium shadow-sm"
-            >
+            <button @click="submitReport()"
+                    class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition text-sm font-medium shadow-sm">
                 Report
             </button>
         </div>

@@ -11,47 +11,41 @@
             results
         </p>
     </div>
-
     <!-- Pagination -->
     <div class="flex items-center justify-center space-x-2">
         <!-- Previous arrow -->
         {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}"
-           class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
-            &laquo;
-        </a>
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
+                &laquo;
+            </a>
         {% else %}
-        <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&laquo;</span>
+            <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&laquo;</span>
         {% endif %}
-
         <!-- Page input -->
         <div class="flex items-center space-x-2">
-            <input
-                    type="number"
-                    id="pageInput"
-                    value="{{ page_obj.number }}"
-                    min="1"
-                    max="{{ page_obj.paginator.num_pages }}"
-                    class="w-16 rounded-md border border-gray-500  px-2 py-1 text-center text-sm text-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
-                    placeholder="Page"
-            >
+            <input type="number"
+                   id="pageInput"
+                   value="{{ page_obj.number }}"
+                   min="1"
+                   max="{{ page_obj.paginator.num_pages }}"
+                   class="w-16 rounded-md border border-gray-500  px-2 py-1 text-center text-sm text-gray-200 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                   placeholder="Page">
             <span class="text-gray-400 text-sm">of {{ page_obj.paginator.num_pages }}</span>
         </div>
-
         <!-- Next arrow -->
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}"
-           class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
-            &raquo;
-        </a>
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm font-medium text-gray-400  hover:text-white">
+                &raquo;
+            </a>
         {% else %}
-        <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&raquo;</span>
+            <span class="inline-flex items-center rounded-md border border-gray-300  px-3 py-2 text-sm text-gray-500 cursor-not-allowed">&raquo;</span>
         {% endif %}
     </div>
 </div>
-
 {% block javascript_global %}
-<script>
+    <script>
     $(document).ready(function() {
     function goToPage() {
         let pageNumber = $("#pageInput").val().trim();
@@ -78,5 +72,5 @@
         goToPage();
     });
 });
-</script>
+    </script>
 {% endblock javascript_global %}

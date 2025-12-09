@@ -1,126 +1,94 @@
 {% extends "core/layout.html" %}
-
 {% block content %}
-<div class=" flex items-center justify-center p-6">
-    <div class="w-full max-w-lg bg-gray-900/80 p-8 rounded-2xl shadow-2xl border border-gray-700">
-
-        <h1 class="text-3xl font-semibold text-white mb-6">
-            Contact Us
-        </h1>
-
-        <form method="POST" class="space-y-5">
-            {% csrf_token %}
-
-            <!-- Name -->
-            <div>
-                <label class="block text-gray-300 mb-1">Name</label>
-                <input
-                        required
-                        type="text"
-                        name="name"
-                        value="{{ form.name.value|default:'' }}"
-                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                {% if form.name.errors %}
-                <p class="text-red-400 text-sm mt-1">{{ form.name.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- Email -->
-            <div>
-                <label class="block text-gray-300 mb-1">Email</label>
-                <input
-                        required
-                        type="email"
-                        name="email"
-                        value="{{ form.email.value|default:'' }}"
-                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                {% if form.email.errors %}
-                <p class="text-red-400 text-sm mt-1">{{ form.email.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- Message -->
-            <div>
-                <label class="block text-gray-300 mb-1">Message</label>
-                <textarea
-                        required
-                        name="message"
-                        rows="5"
-                        class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                >{{ form.message.value|default:'' }}</textarea>
-                {% if form.message.errors %}
-                <p class="text-red-400 text-sm mt-1">{{ form.message.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- Button -->
-            <button
-                    type="submit"
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 transition rounded-lg py-3 text-white font-medium"
-            >
-                Send Message
-            </button>
-
-        </form>
-
-        <section class="mt-5">
-            <h2 class="text-xl font-semibold text-white mb-4">Company info</h2>
-
-            <div class="text-sm leading-7 mb-4">
-                <div>Name: {{company.name}}</div>
-                <div>Country: {{company.country}}</div>
-                <div>City: {{company.city}}</div>
-                <div>Address: {{company.address}}</div>
-            </div>
-
-            <h2 class="text-xl font-semibold text-white mb-4">Legal documents</h2>
-
-            <div class="text-sm leading-7 mb-4">
-                Legal documents can be found
-                <a href="{% url 'legal_documents' %}"
-                   class="text-indigo-400 hover:text-indigo-300 underline font-medium">here.</a>
-            </div>
-
-            <h2 class="text-xl font-semibold text-white mb-4">Billing Issues</h2>
-
-            <div class="text-sm leading-7 mb-4">
-                If you'd like to cancel your subscription and not be billed again, or for any billing questions
-                including
-                refunds on a case-by-case basis, please contact our billing partner, <span
-                    class="font-medium text-gray-200">CCBill</span>
-                via phone <span class="font-mono text-sm text-gray-300">1.888.596.9279</span>, or email at
-                <a href="mailto:consumersupport@ccbill.com" class="text-indigo-400 hover:text-indigo-300 underline">consumersupport@ccbill.com</a>.
-            </div>
-
-            <h3 class="text-lg font-semibold text-white mt-2 mb-2">Complaints</h3>
-
-            <div class="text-sm leading-7 mb-4">
-                For all complaints, please contact us through
-                <a href="{% url 'contact' %}" class="text-indigo-400 hover:text-indigo-300 underline font-medium"
-                   aria-label="Contact page">contact</a>.
-                Complaints will be reviewed and resolved within seven (7) business days. That resolution will then be
-                communicated to the Complainant. Appeals or requests for any decision made should be presented,
-                again, to
-                <a href="{% url 'contact' %}" class="text-indigo-400 hover:text-indigo-300 underline font-medium"
-                   aria-label="Contact page">contact</a>.
-            </div>
-
-            <h3 class="text-lg font-semibold text-white mt-2 mb-2">Appeals</h3>
-
-            <div class="text-sm leading-7">
-                If you have been depicted in any content and would like to appeal removal of such content, please
-                notify us by email via
-                <a href="{% url 'contact' %}" class="text-indigo-400 hover:text-indigo-300 underline font-medium"
-                   aria-label="Contact page">contact</a>.
-                If there should be disagreement regarding an appeal, we will allow the disagreement to be resolved by a
-                neutral party.
-            </div>
-        </section>
-
+    <div class=" flex items-center justify-center p-6">
+        <div class="w-full max-w-lg bg-gray-900/80 p-8 rounded-2xl shadow-2xl border border-gray-700">
+            <h1 class="text-3xl font-semibold text-white mb-6">Contact Us</h1>
+            <form method="POST" class="space-y-5">
+                {% csrf_token %}
+                <!-- Name -->
+                <div>
+                    <label class="block text-gray-300 mb-1">Name</label>
+                    <input required
+                           type="text"
+                           name="name"
+                           value="{{ form.name.value|default:'' }}"
+                           class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    {% if form.name.errors %}<p class="text-red-400 text-sm mt-1">{{ form.name.errors.0 }}</p>{% endif %}
+                </div>
+                <!-- Email -->
+                <div>
+                    <label class="block text-gray-300 mb-1">Email</label>
+                    <input required
+                           type="email"
+                           name="email"
+                           value="{{ form.email.value|default:'' }}"
+                           class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    {% if form.email.errors %}<p class="text-red-400 text-sm mt-1">{{ form.email.errors.0 }}</p>{% endif %}
+                </div>
+                <!-- Message -->
+                <div>
+                    <label class="block text-gray-300 mb-1">Message</label>
+                    <textarea required
+                              name="message"
+                              rows="5"
+                              class="w-full bg-gray-800 border border-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">{{ form.message.value|default:'' }}</textarea>
+                    {% if form.message.errors %}
+                        <p class="text-red-400 text-sm mt-1">{{ form.message.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <!-- Button -->
+                <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 transition rounded-lg py-3 text-white font-medium">
+                    Send Message
+                </button>
+            </form>
+            <section class="mt-5">
+                <h2 class="text-xl font-semibold text-white mb-4">Company info</h2>
+                <div class="text-sm leading-7 mb-4">
+                    <div>Name: {{ company.name }}</div>
+                    <div>Country: {{ company.country }}</div>
+                    <div>City: {{ company.city }}</div>
+                    <div>Address: {{ company.address }}</div>
+                </div>
+                <h2 class="text-xl font-semibold text-white mb-4">Legal documents</h2>
+                <div class="text-sm leading-7 mb-4">
+                    Legal documents can be found
+                    <a href="{% url 'legal_documents' %}"
+                       class="text-indigo-400 hover:text-indigo-300 underline font-medium">here.</a>
+                </div>
+                <h2 class="text-xl font-semibold text-white mb-4">Billing Issues</h2>
+                <div class="text-sm leading-7 mb-4">
+                    If you'd like to cancel your subscription and not be billed again, or for any billing questions
+                    including
+                    refunds on a case-by-case basis, please contact our billing partner, <span class="font-medium text-gray-200">CCBill</span>
+                    via phone <span class="font-mono text-sm text-gray-300">1.888.596.9279</span>, or email at
+                    <a href="mailto:consumersupport@ccbill.com"
+                       class="text-indigo-400 hover:text-indigo-300 underline">consumersupport@ccbill.com</a>.
+                </div>
+                <h3 class="text-lg font-semibold text-white mt-2 mb-2">Complaints</h3>
+                <div class="text-sm leading-7 mb-4">
+                    For all complaints, please contact us through
+                    <a href="{% url 'contact' %}"
+                       class="text-indigo-400 hover:text-indigo-300 underline font-medium"
+                       aria-label="Contact page">contact</a>.
+                    Complaints will be reviewed and resolved within seven (7) business days. That resolution will then be
+                    communicated to the Complainant. Appeals or requests for any decision made should be presented,
+                    again, to
+                    <a href="{% url 'contact' %}"
+                       class="text-indigo-400 hover:text-indigo-300 underline font-medium"
+                       aria-label="Contact page">contact</a>.
+                </div>
+                <h3 class="text-lg font-semibold text-white mt-2 mb-2">Appeals</h3>
+                <div class="text-sm leading-7">
+                    If you have been depicted in any content and would like to appeal removal of such content, please
+                    notify us by email via
+                    <a href="{% url 'contact' %}"
+                       class="text-indigo-400 hover:text-indigo-300 underline font-medium"
+                       aria-label="Contact page">contact</a>.
+                    If there should be disagreement regarding an appeal, we will allow the disagreement to be resolved by a
+                    neutral party.
+                </div>
+            </section>
+        </div>
     </div>
-
-
-</div>
 {% endblock content %}

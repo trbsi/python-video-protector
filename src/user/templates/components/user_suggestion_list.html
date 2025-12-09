@@ -1,16 +1,12 @@
 <div class="relative w-full">
     <!-- Suggestions dropdown -->
-    <div
-            x-show="userSuggestionComponent.openUserSuggestion"
-            class="absolute left-0 top-full mt-1 w-full bg-white border rounded shadow z-100"
-    >
+    <div x-show="userSuggestionComponent.openUserSuggestion"
+         class="absolute left-0 top-full mt-1 w-full bg-white border rounded shadow z-100">
         <template x-for="(item, i) in userSuggestionComponent.suggestions" :key="i">
-            <div
-                    @click="userSuggestionComponent.chooseUsername(item, $event)"
-                    :class="{'bg-gray-100': userSuggestionComponent.highlightedIndex === i}"
-                    class="p-2 cursor-pointer hover:bg-gray-200 text-black"
-                    x-text="item"
-            ></div>
+            <div @click="userSuggestionComponent.chooseUsername(item, $event)"
+                 :class="{'bg-gray-100': userSuggestionComponent.highlightedIndex === i}"
+                 class="p-2 cursor-pointer hover:bg-gray-200 text-black"
+                 x-text="item"></div>
         </template>
     </div>
 </div>

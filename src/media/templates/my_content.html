@@ -1,104 +1,98 @@
 {% extends "core/layout.html" %}
 {% load static %}
 {% load text_filters %}
-
 {% block content %}
-<div id="my-content-view" class="p-4"
-     x-data="myContentComponent('{{user_suggestion_api}}')"
-     x-init="init()">
-
-    <div class="flex-1 space-y-4 relative ">
-        <form method="post" action="{% url 'media.update_my_media' %}" id="my_content_form">
-            {% csrf_token %}
-            {% for media in media_list %}
-            <div class="media-block  p-4  space-y-2 mb-5 border-b-1 border-gray-400">
-                <div>
-                    {% url 'media.view_single_media' id=media.id as media_url %}
-                    <button type="button" x-on:click="copyLink('{{ media_url|full_url_filter }}')"
-                            class="">
-                        Click to copy
-                    </button>
-                    <button type="button" x-on:click="shareLink('{{ media_url|full_url_filter }}')"
-                            class="">
-                        Click to share
-                    </button>
-                    <a href="{{ media_url|full_url_filter }}">
-                        {{ media_url|full_url_filter }}
-                    </a>
-                </div>
-                <input type="hidden" name="media_ids" value="{{media.id}}">
-                <div class="flex items-center">
-                    <input name="delete" value="{{media.id}}" id="delete{{media.id}}" type="checkbox"
-                           class="flex-0 w-4 h-4 bg-gray-500 border-gray-700 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="delete{{media.id}}"
-                           class="flex-1 py-2 ms-2 text-sm font-medium">Mark for
-                        deletion</label>
-                </div>
-                <!-- Preview -->
-                {% if media.is_processed %}
-                <div class="w-full rounded overflow-hidden  flex items-end justify-center">
-                    {% if media.is_video %}
-                    <video src="{{ media.get_file_url }}" preload="none" poster="{{media.get_thumbnail_url}}"
-                           class="object-contain w-full h-full"
-                           controls></video>
-                    {% endif %}
-                </div>
-                {% else %}
-                    {% include "components/elements/info_alert.html" with message="Processing media... We will notify you via email once it's ready." %}
+    <div id="my-content-view"
+         class="p-4"
+         x-data="myContentComponent('{{ user_suggestion_api }}')"
+         x-init="init()">
+        <div class="flex-1 space-y-4 relative ">
+            <form method="post"
+                  action="{% url 'media.update_my_media' %}"
+                  id="my_content_form">
+                {% csrf_token %}
+                {% for media in media_list %}
+                    <div class="media-block  p-4  space-y-2 mb-5 border-b-1 border-gray-400">
+                        <div>
+                            {% url 'media.view_single_media' id=media.id as media_url %}
+                            <button type="button"
+                                    x-on:click="copyLink('{{ media_url|full_url_filter }}')"
+                                    class="">Click to copy</button>
+                            <button type="button"
+                                    x-on:click="shareLink('{{ media_url|full_url_filter }}')"
+                                    class="">Click to share</button>
+                            <a href="{{ media_url|full_url_filter }}">{{ media_url|full_url_filter }}</a>
+                        </div>
+                        <input type="hidden" name="media_ids" value="{{ media.id }}">
+                        <div class="flex items-center">
+                            <input name="delete"
+                                   value="{{ media.id }}"
+                                   id="delete{{ media.id }}"
+                                   type="checkbox"
+                                   class="flex-0 w-4 h-4 bg-gray-500 border-gray-700 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="delete{{ media.id }}"
+                                   class="flex-1 py-2 ms-2 text-sm font-medium">
+                                Mark for
+                                deletion
+                            </label>
+                        </div>
+                        <!-- Preview -->
+                        {% if media.is_processed %}
+                            <div class="w-full rounded overflow-hidden  flex items-end justify-center">
+                                {% if media.is_video %}
+                                    <video src="{{ media.get_file_url }}"
+                                           preload="none"
+                                           poster="{{ media.get_thumbnail_url }}"
+                                           class="object-contain w-full h-full"
+                                           controls>
+                                    </video>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            {% include "components/elements/info_alert.html" with message="Processing media... We will notify you via email once it's ready." %}
+                        {% endif %}
+                        <div data-suggestion-root>
+                            <!-- Textarea for file description -->
+                            <textarea id="description_field_{{media.id}}"
+                                      name="descriptions"
+                                      rows="5"
+                                      data-file-id="{{media.id}}"
+                                      placeholder="Add a description and hashtags. Tag another creator here."
+                                      @input="userSuggestionComponent.fetchSuggestions($event)"
+                                      class="w-full p-2 rounded   text-sm">{{ media.get_description }}</textarea>
+                            {% include "components/user_suggestion_list.html" %}
+                        </div>
+                        <div>
+                            <label class="text-sm">Unlock price in $:</label>
+                            <input type="text"
+                                   inputmode="decimal"
+                                   pattern="\d+(\.\d{1,2})?"
+                                   name="unlockPrices"
+                                   step="0.01"
+                                   value="{{ media.unlock_price }}"
+                                   class="w-full p-2 rounded bg-gray-700 text-white text-sm" />
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if not media_list.object_list %}
+                    <div class="flex flex-col items-center justify-center  px-4">
+                        <!-- Icon -->
+                        <i class="ri-video-off-line ri-5x"></i>
+                        <!-- Heading -->
+                        <h1 class="text-2xl md:text-3xl font-semibold mb-2">No content yet</h1>
+                        <!-- Description -->
+                        <p class="text-gray-400 text-center max-w-md mb-6">
+                            It looks like there’s nothing here. Once you start posting content, it will appear here.
+                        </p>
+                    </div>
                 {% endif %}
-
-                <div data-suggestion-root>
-                    <!-- Textarea for file description -->
-                    <textarea
-                            id="description_field_{{media.id}}"
-                            name="descriptions"
-                            rows="5"
-                            data-file-id="{{media.id}}"
-                            placeholder="Add a description and hashtags. Tag another creator here."
-                            @input="userSuggestionComponent.fetchSuggestions($event)"
-                            class="w-full p-2 rounded   text-sm"
-                    >{{ media.get_description }}</textarea>
-                    {% include "components/user_suggestion_list.html" %}
-                </div>
-                <div>
-                    <label class="text-sm">Unlock price in $:</label>
-                    <input type="text"
-                           inputmode="decimal"
-                           pattern="\d+(\.\d{1,2})?"
-                           name="unlockPrices"
-                           step="0.01"
-                           value="{{media.unlock_price}}"
-                           class="w-full p-2 rounded bg-gray-700 text-white text-sm"
-                    />
-
-                </div>
-            </div>
-            {% endfor %}
-
-            {% if not media_list.object_list %}
-            <div class="flex flex-col items-center justify-center  px-4">
-                <!-- Icon -->
-                <i class="ri-video-off-line ri-5x"></i>
-                <!-- Heading -->
-                <h1 class="text-2xl md:text-3xl font-semibold mb-2">No content yet</h1>
-
-                <!-- Description -->
-                <p class="text-gray-400 text-center max-w-md mb-6">
-                    It looks like there’s nothing here. Once you start posting content, it will appear here.
-                </p>
-            </div>
-            {% endif %}
-
-            {% include "my_content/my_content_buttons.html" %}
-        </form>
+                {% include "my_content/my_content_buttons.html" %}
+            </form>
+        </div>
     </div>
-</div>
-
-{% include "components/elements/pagination.html" with page_obj=media_list %}
+    {% include "components/elements/pagination.html" with page_obj=media_list %}
 {% endblock content %}
-
 {% block javascript_include %}
-<script src="{% static 'js/user/user_suggestion.js' %}"></script>
-<script src="{% static 'js/media/my_content.js' %}"></script>
+    <script src="{% static 'js/user/user_suggestion.js' %}"></script>
+    <script src="{% static 'js/media/my_content.js' %}"></script>
 {% endblock javascript_include %}
-

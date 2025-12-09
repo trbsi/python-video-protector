@@ -1,28 +1,25 @@
 {% extends "emails/layout.html" %}
-
 {% block title %}
-Your video is ready!
+    Your video is ready!
 {% endblock title %}
-
 {% block content %}
-Hi {{creator_name}},
-<br>
-<br>
-Great news — your video has finished processing and is now ready.
-<br>
-<br>
-You can now:
-<ul>
-    <li>Share it with your audience</li>
-    <li>Monetize it</li>
-    <li>Manage permissions and collaborators</li>
-</ul>
-<br>
-Visit your dashboard to publish or make updates:
-<br>
-<a href="{{video_url}}" target="_blank">{{video_url}}</a>
-<br>
-<br>
-Thanks for creating with us!
-
+    Hi {{ creator_name }},
+    <br>
+    <br>
+    Great news — your video has finished processing and is now ready.
+    <br>
+    <br>
+    You can now:
+    <ul>
+        <li>Share it with your audience</li>
+        <li>Monetize it</li>
+        <li>Manage permissions and collaborators</li>
+    </ul>
+    <br>
+    Visit your dashboard to publish or make updates:
+    <br>
+    <a href="{{ video_url }}" target="_blank">{{ video_url }}</a>
+    <br>
+    <br>
+    Thanks for creating with us!
 {% endblock content %}

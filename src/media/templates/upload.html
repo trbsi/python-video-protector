@@ -1,36 +1,31 @@
 {% extends "core/layout.html" %}
 {% load static %}
-
 {% block javascript_include %}
-<script src="{% static 'js/user/user_suggestion.js' %}"></script>
-<script src="{% static 'js/media/file_uploader.js' %}"></script>
+    <script src="{% static 'js/user/user_suggestion.js' %}"></script>
+    <script src="{% static 'js/media/file_uploader.js' %}"></script>
 {% endblock javascript_include %}
-
 {% block content %}
-<!-- Upload View -->
-<div id="upload-view" class=" p-4"
-     x-data="fileUploaderComponent('{{upload_api}}', '{{user_suggestion_api}}', '{{my_content_url}}')" x-init="init()">
-    <div x-show="files.length == 0"
-         class="flex flex-col h-full items-center justify-center">
-        <!-- Icon -->
-        <i class="ri-video-line ri-5x"></i>
-        <!-- Heading -->
-        <h1 class="text-2xl md:text-3xl font-semibold mb-2">Start uploading/recording</h1>
-
-        <!-- Description -->
-        <p class="mb-6">
-            1. Click on "Record/Choose" to record or choose a video
-            <br>
-            2. Click on "Post Now" to upload and publish right now
-        </p>
+    <!-- Upload View -->
+    <div id="upload-view"
+         class=" p-4"
+         x-data="fileUploaderComponent('{{ upload_api }}', '{{ user_suggestion_api }}', '{{ my_content_url }}')"
+         x-init="init()">
+        <div x-show="files.length == 0"
+             class="flex flex-col h-full items-center justify-center">
+            <!-- Icon -->
+            <i class="ri-video-line ri-5x"></i>
+            <!-- Heading -->
+            <h1 class="text-2xl md:text-3xl font-semibold mb-2">Start uploading/recording</h1>
+            <!-- Description -->
+            <p class="mb-6">
+                1. Click on "Record/Choose" to record or choose a video
+                <br>
+                2. Click on "Post Now" to upload and publish right now
+            </p>
+        </div>
+        <!-- File List with Preview and Textarea -->
+        {% include "upload/file_preview.html" %}
+        <!-- Bottom Controls -->
+        {% include "upload/upload_media_buttons.html" %}
     </div>
-
-    <!-- File List with Preview and Textarea -->
-    {% include "upload/file_preview.html" %}
-
-    <!-- Bottom Controls -->
-    {% include "upload/upload_media_buttons.html" %}
-</div>
-
-
 {% endblock content %}

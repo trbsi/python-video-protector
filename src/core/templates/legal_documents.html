@@ -1,17 +1,16 @@
 {% extends "core/layout.html" %}
-
 {% block content %}
-
-{% include "components/elements/back_button.html" with include_header=True %}
-
-<div class="p-7">
-    <h1 class="text-3xl font-bold mb-6">Legal documents</h1>
-    <ul class="max-w-md space-y-1 text-white list-disc list-inside">
-        {% for document in legal_documents %}
-        <li>
-            <a href="{% url 'legal_documents' %}?document={{document.file}}" class="underline" target="_blank">{{document.name}}</a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+    {% include "components/elements/back_button.html" with include_header=True %}
+    <div class="p-7">
+        <h1 class="text-3xl font-bold mb-6">Legal documents</h1>
+        <ul class="max-w-md space-y-1 text-white list-disc list-inside">
+            {% for document in legal_documents %}
+                <li>
+                    <a href="{% url 'legal_documents' %}?document={{ document.file }}"
+                       class="underline"
+                       target="_blank">{{ document.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock content %}

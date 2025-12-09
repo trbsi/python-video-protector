@@ -1,14 +1,12 @@
 {% extends "emails/layout.html" %}
-
 {% block title %}
-Content Reported!
+    Content Reported!
 {% endblock title %}
-
 {% block content %}
-<ul>
-    <li>reported by {{ reported_by }}</li>
-    <li>content type: {{ type }}</li>
-    <li>content id: {{ id }}</li>
-    <li>description: {{ description }}</li>
-</ul>
+    <ul>
+        <li>reported by {{ reported_by }}</li>
+        <li>content type: {{ type }}</li>
+        <li>content id: {{ id }}</li>
+        <li>description: {{ description }}</li>
+    </ul>
 {% endblock content %}

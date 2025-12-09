@@ -1,65 +1,53 @@
 {% extends "core/layout.html" %}
 {% load i18n %}
-{% block title %}{% trans "Log out" %}{% endblock %}
-
+{% block title %}
+    {% trans "Log out" %}
+{% endblock %}
 {% block content %}
-<div class=" flex items-center justify-center">
-    <!-- Card -->
-    <div>
-        <!-- Icon + heading -->
-        <div class="flex items-center space-x-3">
-            <svg class="w-10 h-10 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                      d="M17 16l4-4m0 0l-4-4m4 4H7"/>
-            </svg>
-            <h2 class="text-2xl font-semibold text-gray-900">{% trans "Log out" %}</h2>
-        </div>
-
-        <!-- Optional message list -->
-        {% if messages %}
-        <div class="mt-4 space-y-2">
-            {% for message in messages %}
-            <div class="px-4 py-2 rounded-md text-sm {{ message.tags }}">
-                {{ message }}
+    <div class=" flex items-center justify-center">
+        <!-- Card -->
+        <div>
+            <!-- Icon + heading -->
+            <div class="flex items-center space-x-3">
+                <svg class="w-10 h-10 text-red-600"
+                     xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-900">{% trans "Log out" %}</h2>
             </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        <!-- Explanation -->
-        <p class="mt-4 text-sm text-gray-600">
-            {% trans "You are about to log out of your account. If you want to stay signed in, choose Cancel." %}
-        </p>
-
-        <!-- Logout form -->
-        <form method="post" action="{% url 'account_logout' %}" class="mt-6">
-            {% csrf_token %}
-            {# if you use next/redirects: <input type="hidden" name="next" value="{{ next }}"> #}
-
-            <div class="flex gap-3">
-                <button
-                        type="submit"
-                        class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                        aria-label="{% trans 'Confirm logout' %}"
-                >
-                    {% trans "Log out" %}
-                </button>
-
-                <a
-                        href="{% url 'account_login' %}"
-                        class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-gray-200 text-sm font-medium rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        aria-label="{% trans 'Cancel and return' %}"
-                >
-                    {% trans "Cancel" %}
-                </a>
+            <!-- Optional message list -->
+            {% if messages %}
+                <div class="mt-4 space-y-2">
+                    {% for message in messages %}
+                        <div class="px-4 py-2 rounded-md text-sm {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <!-- Explanation -->
+            <p class="mt-4 text-sm text-gray-600">
+                {% trans "You are about to log out of your account. If you want to stay signed in, choose Cancel." %}
+            </p>
+            <!-- Logout form -->
+            <form method="post" action="{% url 'account_logout' %}" class="mt-6">
+                {% csrf_token %}
+                {# if you use next/redirects: <input type="hidden" name="next" value="{{ next }}"> #}
+                <div class="flex gap-3">
+                    <button type="submit"
+                            class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            aria-label="{% trans 'Confirm logout' %}">{% trans "Log out" %}</button>
+                    <a href="{% url 'account_login' %}"
+                       class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-gray-200 text-sm font-medium rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                       aria-label="{% trans 'Cancel and return' %}">{% trans "Cancel" %}</a>
+                </div>
+            </form>
+            <!-- Optional quick links -->
+            <div class="mt-4 text-xs text-gray-500">
+                <a href="{% url 'home' %}" class="underline">{% trans "Home" %}</a>
             </div>
-        </form>
-
-        <!-- Optional quick links -->
-        <div class="mt-4 text-xs text-gray-500">
-            <a href="{% url 'home' %}" class="underline">{% trans "Home" %}</a>
         </div>
     </div>
-</div>
 {% endblock content %}

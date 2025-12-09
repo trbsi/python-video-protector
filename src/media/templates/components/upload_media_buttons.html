@@ -1,31 +1,24 @@
 <div class="flex justify-between items-center mt-3 " x-show="!isUploading">
     <!-- Select / Capture Button -->
     <div class="flex-1">
-        <button
-                @click="$refs.fileInput.click()"
-                class="w-full px-4 py-2 bg-gradient-to-r from-primary to-secondary rounded-lg "
-        >
+        <button @click="$refs.fileInput.click()"
+                class="w-full px-4 py-2 bg-gradient-to-r from-primary to-secondary rounded-lg ">
             <i class="ri-video-on-line ri-lg"></i>
             <br>
             <span class="text-xs">Record or Choose</span>
         </button>
-        <input
-                id="upload_media"
-                type="file"
-                multiple
-                accept="video/*"
-                class="hidden"
-                x-ref="fileInput"
-                @change="handleFiles"
-        >
+        <input id="upload_media"
+               type="file"
+               multiple
+               accept="video/*"
+               class="hidden"
+               x-ref="fileInput"
+               @change="handleFiles">
     </div>
-
     <!-- Upload All Button -->
     <div class="flex-1 pl-2">
-        <button
-                @click="uploadAllFiles('post_now')"
-                class="w-full px-4 py-2 bg-gradient-to-r from-primary to-secondary rounded-lg"
-        >
+        <button @click="uploadAllFiles('post_now')"
+                class="w-full px-4 py-2 bg-gradient-to-r from-primary to-secondary rounded-lg">
             <i class="ri-upload-cloud-line ri-lg"></i>
             <br>
             <span class="text-xs">Post Now</span>

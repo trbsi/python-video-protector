@@ -4,19 +4,15 @@
     <div class="w-full pr-2">
         <button type="submit"
                 value="save"
-                class="w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg "
-        >
+                class="w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg ">
             <i class="ri-save-line"></i> <span class="text-xs">Save</span>
         </button>
-
     </div>
-
     <!-- Delete Button -->
     <div class="w-full pl-2">
         <button type="submit"
                 value="delete"
-                class="delete_button w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg"
-        >
+                class="delete_button w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg">
             <i class="ri-delete-bin-line"></i> <span class="text-xs">Delete</span>
         </button>
     </div>
@@ -26,26 +22,21 @@
     <div class="w-full pr-2">
         <button type="submit"
                 value="save"
-                class="w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg "
-        >
+                class="w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg ">
             <i class="ri-save-line"></i> <span class="text-xs">Save</span>
         </button>
-
     </div>
-
     <!-- Delete Button -->
     <div class="w-full pl-2">
         <button type="submit"
                 value="delete"
-                class="delete_button w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg"
-        >
+                class="delete_button w-full px-4 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg">
             <i class="ri-delete-bin-line"></i> <span class="text-xs">Delete</span>
         </button>
     </div>
 </div>
-
 {% block javascript_global %}
-<script>
+    <script>
     $(window).on('scroll', function () {
         hideButtons();
     });
@@ -76,5 +67,5 @@
             $('#button-bar-fixed').removeClass('hidden');
         }
     }
-</script>
+    </script>
 {% endblock javascript_global %}
