@@ -2,9 +2,16 @@ acme-companion:
   image: nginxproxy/acme-companion
   container_name: protectapp-acme-companion
   restart: unless-stopped
-  depends_on: [ nginx-proxy ]
+  depends_on:
+    - nginx-proxy
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - protectapp_certificates:/etc/nginx/certs
+    - protectapp_acme:/etc/acme.sh
     - ./nginx/vhost:/etc/nginx/vhost.d
-  networks: [ protectapp-net ]
+  networks:
+    - protectapp-net
+
+
+volumes:
+  protectapp_acme:
