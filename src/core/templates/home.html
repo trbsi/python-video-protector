@@ -1,4 +1,29 @@
 <!-- login.html -->
 {% extends "core/layout.html" %}
+{% load static %}
 {% block title %}Home{% endblock %}
-{% block content %}<div>You are home</div>{% endblock %}
+
+{% block javascript_include %}
+    <script src="{% static 'js/media/feed.js' %}"></script>
+{% endblock javascript_include %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto"
+     x-data="mediaFeed('feed', '{{feed_api_url}}')"
+     x-init="init()">
+
+    <div class="px-3 py-2">
+        <div class="grid grid-cols-3 gap-2 my-3">
+            <!-- Render media items -->
+            <template x-for="media in mediaList" :key="media.id">
+                <a class="block bg-center bg-no-repeat bg-cover h-40 w-full rounded-lg"
+                   :href="media.url"
+                   :style="`background-image: url('${media.thumbnail}')`"
+                   >
+                </a>
+            </template>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

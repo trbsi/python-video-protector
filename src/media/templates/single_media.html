@@ -48,12 +48,12 @@
                         Unlock for ${{ media_value_object.media.unlock_price }}
                     </button>
                     {% if not user.is_authenticated %}
-                        <div class="text-xs italic mb-5 ">By clicking <strong>"Unlock"</strong>, an account will be automatically created for you if you don't login or register.</div>
+                        <div class="text-xs italic">By clicking <strong>"Unlock"</strong>, an account will be automatically created for you if you don't login or register.</div>
                     {% endif %}
                 </form>
             {% endif %}
             <video id="my-video"
-                   class="video-js vjs-default-skin "
+                   class="video-js vjs-default-skin mt-3"
                    controls
                    preload="metadata"
                    poster="{{ media_value_object.media.get_thumbnail_url }}"

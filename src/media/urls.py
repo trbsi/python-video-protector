@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/upload', views.api_upload, name='media.api.upload'),
     path('unlock', views.unlock, name='media.unlock'),
     path('api/record-views', views.record_views, name='media.api.record_views'),
+    path('api/media', views.api_get_feed, name='media.api.get_media'),
+
 ]

@@ -21,9 +21,7 @@
 
         <!-- JS libs -->
         <script src="https://unpkg.com/alpinejs" defer></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
-                integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
-                crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
         <!-- Video js -->
         <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet" />
@@ -192,58 +190,60 @@
         {% endif %}
         <!-- Minimal JS for interactions (menu toggle + year) -->
         <script>
-    // Mobile nav toggle
-    const navToggle = document.getElementById('nav-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const iconOpen = document.getElementById('icon-open');
-    const iconClose = document.getElementById('icon-close');
+            // Mobile nav toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconOpen = document.getElementById('icon-open');
+            const iconClose = document.getElementById('icon-close');
 
-    navToggle?.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      mobileMenu.classList.toggle('hidden');
-      iconOpen.classList.toggle('hidden');
-      iconClose.classList.toggle('hidden');
-    });
+            navToggle?.addEventListener('click', () => {
+              const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+              navToggle.setAttribute('aria-expanded', String(!expanded));
+              mobileMenu.classList.toggle('hidden');
+              iconOpen.classList.toggle('hidden');
+              iconClose.classList.toggle('hidden');
+            });
 
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Progressive enhancement note: add focus management and trapping if building a larger app.
+            // Progressive enhancement note: add focus management and trapping if building a larger app.
         </script>
         <script>
-    const btn = document.getElementById('accountDropdownBtn');
-    const menu = document.getElementById('accountDropdownMenu');
+            const accountDropdownBtn = document.getElementById('accountDropdownBtn');
+            const menu = document.getElementById('accountDropdownMenu');
 
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
+            if (accountDropdownBtn) {
+                accountDropdownBtn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
 
-    // Close dropdown if clicked outside
-    document.addEventListener('click', (event) => {
-        if (!btn.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add('hidden');
-        }
-    });
+                // Close dropdown if clicked outside
+                document.addEventListener('click', (event) => {
+                    if (!accountDropdownBtn.contains(event.target) && !menu.contains(event.target)) {
+                        menu.classList.add('hidden');
+                    }
+                });
+            }
         </script>
         <script>
-    toastr.options.closeDuration = 10000;
-    toastr.options.progressBar = true;
-    toastr.options.escapeHtml = false;
+            toastr.options.closeDuration = 10000;
+            toastr.options.progressBar = true;
+            toastr.options.escapeHtml = false;
 
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-            toastr.success('{{message}}');
-            {% elif message.tags == 'error' %}
-            toastr.error('{{message}}');
-            {% elif message.tags == 'warning' %}
-            toastr.warning('{{message}}');
-            {% elif message.tags == 'info' %}
-            toastr.info('{{message}}');
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                    toastr.success('{{message}}');
+                    {% elif message.tags == 'error' %}
+                    toastr.error('{{message}}');
+                    {% elif message.tags == 'warning' %}
+                    toastr.warning('{{message}}');
+                    {% elif message.tags == 'info' %}
+                    toastr.info('{{message}}');
+                    {% endif %}
+                {% endfor %}
             {% endif %}
-        {% endfor %}
-    {% endif %}
         </script>
     </body>
 </html>

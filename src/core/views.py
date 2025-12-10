@@ -3,6 +3,7 @@ from pathlib import Path
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
 
 from protectapp import settings
@@ -10,11 +11,39 @@ from src.core.utils import reverse_lazy_with_query
 from src.notification.services.notification_service import NotificationService
 from src.notification.value_objects.email_value_object import EmailValueObject
 from src.notification.value_objects.push_notification_value_object import PushNotificationValueObject
+from src.user.services.invitation.invitation_service import InvitationService
 
 
 @require_GET
 def home(request: HttpRequest) -> HttpResponse:
-    return render(request, 'home.html')
+    get = request.GET
+    username = get.get('invitation')
+    response = render(
+        request,
+        'home.html',
+        {'feed_api_url': reverse_lazy('media.api.get_media')}
+    )
+
+    if not username:
+        return response
+
+    service = InvitationService()
+    can_invite = service.can_invite(username=username)
+    if can_invite:
+        messages.success(request, f'{username} invited you to become a creator.')
+        response = redirect(reverse_lazy('account_signup'))
+        response.set_cookie(
+            'invited_by',
+            username,
+            max_age=60 * 60 * 24 * 30,  # seconds (30 day)
+            secure=True,  # only HTTPS
+            httponly=True,  # not accessible via JS
+            samesite="Lax",
+        )
+    else:
+        messages.error(request, f'Unfortunately {username} reached maximum number of invites.')
+
+    return response
 
 
 @require_GET

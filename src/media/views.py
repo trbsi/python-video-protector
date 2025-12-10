@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET, require_POST
 
+from src.media.services.load_feed.load_feed_service import LoadFeedService
 from src.media.services.my_content.my_content_service import MyContentService
 from src.media.services.single_media.single_media_service import SingleMediaService
 from src.media.services.unlock.unlock_service import UnlockService
@@ -153,6 +154,7 @@ def record_views(request: HttpRequest) -> JsonResponse:
     return JsonResponse({})
 
 
+# @TODO finish this
 def _can_access_upload(request: HttpRequest) -> bool:
     return True
     service = CreatorService()
@@ -164,3 +166,23 @@ def _can_access_upload(request: HttpRequest) -> bool:
         return False
     else:
         return True
+
+
+@require_GET
+def api_get_feed(request: HttpRequest) -> JsonResponse:
+    requestData = request.GET
+    page = int(requestData.get('page'))
+    type = requestData.get('type')
+    filters = requestData.get('filters')
+
+    service: LoadFeedService = LoadFeedService()
+
+    if type == LoadFeedService.FEED_TYPE_FOLLOW:
+        data: dict = service.get_following_feed(page=page, user=request.user, filters=filters)
+    else:
+        data: dict = service.get_discover_feed(page=page, user=request.user, filters=filters)
+
+    return JsonResponse({
+        'results': data['result'],
+        'next_page': data['next_page'],
+    })

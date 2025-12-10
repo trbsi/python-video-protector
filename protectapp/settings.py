@@ -81,14 +81,6 @@ MIDDLEWARE = [
     'src.age_verification.middlewares.AgeVerificationMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
 ROOT_URLCONF = 'protectapp.urls'
 
 TEMPLATES = [
@@ -194,6 +186,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = "user.User"
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365  # 1 year
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 
 # Email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
