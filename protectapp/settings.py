@@ -162,6 +162,7 @@ SESSION_COOKIE_SECURE = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -236,3 +237,4 @@ AGE_VERIFICATION_CONFIG = {
         'webhook_secret_key': env('AGE_VERIFICATION_DIDIT_WEBHOOK_KEY'),
     }
 }
+
