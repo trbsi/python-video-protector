@@ -24,19 +24,19 @@ if $BUILD_DOCKER; then
     cd -
 fi
 
-echo "→ Collecting JS"
+echo "--------------------------- Collecting JS "---------------------------"
 docker exec -it "$DOCKER_CONTAINER" poetry run python manage.py collect_javascript_command
 
-echo "→ Collecting static files"
+echo "--------------------------- Collecting static files "---------------------------"
 docker exec -it "$DOCKER_CONTAINER" poetry run python manage.py collectstatic --noinput --clear
 
-echo "→ Running migrations"
+echo "--------------------------- Running migrations "---------------------------"
 docker exec -it "$DOCKER_CONTAINER" poetry run python manage.py migrate
 
-echo "→ Restarting containers"
+echo "--------------------------- Restarting containers "---------------------------"
 docker restart "$DOCKER_CONTAINER" "$WORKER" "$BEAT"
 
-echo "→ Downloading GeoIP"
+echo ""-------------------------- Downloading GeoIP ---------------------------"
 docker exec -it "$DOCKER_CONTAINER" poetry run python manage.py download_geoip_command
 
 echo "✔ Done"
