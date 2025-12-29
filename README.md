@@ -1,7 +1,6 @@
 # Screenshots
 
-![image info](./docs/shot1a.png)
-![image info](./docs/shot2b.png)
+![image info](./docs/Screenshot_x.png)
 
 # Local setup
 
