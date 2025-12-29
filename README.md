@@ -1,3 +1,8 @@
+# Screenshots
+
+![image info](./docs/shot1a.png)
+![image info](./docs/shot2b.png)
+
 # Local setup
 
 ## Set up https certs
